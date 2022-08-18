@@ -20,6 +20,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int state = 1;
   roll() {
+    debugPrint('dice rolled');
     setState(() {
       state = Random().nextInt(6) + 1;
       ;
