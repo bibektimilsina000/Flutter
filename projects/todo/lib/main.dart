@@ -14,11 +14,16 @@ class TODO extends StatefulWidget {
 }
 
 class _TODOState extends State<TODO> {
-  var listOfTodo = ['hello'];
+  String value = '';
+  var listOfTodo = [''];
   addToDo(String item) {
     setState(() {
       listOfTodo.add(item);
     });
+  }
+
+  deleteItem(item) {
+    listOfTodo.remove(item);
   }
 
   @override
@@ -31,21 +36,37 @@ class _TODOState extends State<TODO> {
       body: ListView.builder(
         itemCount: listOfTodo.length,
         itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            leading: const Icon(Icons.work),
-            title: Text(
-              listOfTodo[index],
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            // trailing: const Icon(Icons.abc),
-          );
+          return index == 0
+              ? Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: TextFormField(
+                    decoration: const InputDecoration(hintText: 'Add Item'),
+                    onChanged: (data) {
+                      value = data;
+                    },
+                  ),
+                )
+              : ListTile(
+                  leading: const Icon(Icons.work),
+                  trailing: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.delete),
+                  ),
+                  title: Text(
+                    listOfTodo[index],
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  // trailing: const Icon(Icons.abc),
+                );
         },
       ),
       floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          addToDo(value);
+        },
         child: const Icon(
           Icons.add,
         ),
-        onPressed: () {},
       ),
     );
   }
