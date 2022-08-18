@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 void main(List<String> args) {
@@ -16,10 +18,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int numb = 0;
-
-  int roll() {
-    return numb;
+  int state = 1;
+  roll() {
+    setState(() {
+      state = Random().nextInt(6) + 1;
+      ;
+    });
   }
 
   @override
@@ -29,15 +33,35 @@ class _HomePageState extends State<HomePage> {
         centerTitle: true,
         title: const Text("Dice Roller"),
       ),
-      body: Column(
-        children: [
-          const SizedBox(height: 20),
-          Image.asset(
-            "images/dice1.webp",
-            height: 20,
-          ),
-          MaterialButton(onPressed: roll)
-        ],
+      body: Center(
+        child: Column(
+          children: [
+            const SizedBox(height: 20),
+            Image.asset(
+              'images/dice$state.webp',
+              height: 200,
+              width: 200,
+            ),
+            const SizedBox(height: 20),
+            MaterialButton(
+              color: Colors.blue,
+              onPressed: roll,
+              child: const Text(
+                'Roll',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            const SizedBox(height: 300),
+            const Text(
+              "Powered by : Brandtech",
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  backgroundColor: Color.fromARGB(255, 103, 39, 212),
+                  color: Colors.white),
+            )
+          ],
+        ),
       ),
     );
   }
