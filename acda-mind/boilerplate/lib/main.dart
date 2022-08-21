@@ -53,23 +53,25 @@ class MyAppState extends State<MyApp> {
 
     return MaterialApp(
       home: Scaffold(
-          appBar: AppBar(
-            title: const Text('Quitz App'),
+        appBar: AppBar(
+          title: const Text('Quitz App'),
+        ),
+        body: Column(
+          children: [
+            Question(questions[questionIndex]['questionText'].toString()),
+            ...(questions[questionIndex]['answer'] as List<String>)
+                .map((answer) {
+              return Answer(answerQuestion, answer);
+            }).toList()
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: restart,
+          child: const Icon(
+            Icons.restart_alt_outlined,
           ),
-          body: Column(
-            children: [
-              Question(questions[questionIndex]['questionText'].toString()),
-              ...(questions[questionIndex]['answer'] as List<String>)
-                  .map((answer) {
-                return Answer(answerQuestion, answer);
-              }).toList()
-            ],
-          ),
-          floatingActionButton: FloatingActionButton(
-              onPressed: restart,
-              child: const Icon(
-                Icons.restart_alt_outlined,
-              ))),
+        ),
+      ),
     );
   }
 }
