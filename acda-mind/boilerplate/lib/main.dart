@@ -17,19 +17,40 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  var _questionIndex = 0;
+  var questionIndex = 0;
+  restart() {
+    setState(() {
+      questionIndex = 0;
+    });
+  }
+
   answerQuestion() {
     setState(() {
-      _questionIndex++;
+      questionIndex++;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     var questions = [
-      'What\'s your favorite color?',
-      'What\'s your favorite animal?',
+      {
+        'questionText': 'What\'s your favorite color?',
+        'answer': ['Black', 'red', 'blue']
+      },
+      {
+        'questionText': 'What\'s your favorite animal?',
+        'answer': ['Snake', 'Tiger', 'wolf', 'cat']
+      },
+      {
+        'questionText': 'What\'s your favorite superhero?',
+        'answer': ['Ironman ', 'Thor ', 'Captain America']
+      },
+      {
+        'questionText': 'Restart your game',
+        'answer': ['']
+      },
     ];
+
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(
@@ -37,12 +58,18 @@ class MyAppState extends State<MyApp> {
           ),
           body: Column(
             children: [
-              Question(questions[_questionIndex]),
-              Answer(answerQuestion),
-              Answer(answerQuestion),
-              Answer(answerQuestion),
+              Question(questions[questionIndex]['questionText'].toString()),
+              ...(questions[questionIndex]['answer'] as List<String>)
+                  .map((answer) {
+                return Answer(answerQuestion, answer);
+              }).toList()
             ],
-          )),
+          ),
+          floatingActionButton: FloatingActionButton(
+              onPressed: restart,
+              child: const Icon(
+                Icons.restart_alt_outlined,
+              ))),
     );
   }
 }
