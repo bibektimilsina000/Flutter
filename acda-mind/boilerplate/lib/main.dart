@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import './question.dart';
-import './answer.dart';
+import 'quiz.dart';
+import 'result.dart';
 
 // void main() {
 //   runApp(const MyApp());
@@ -32,7 +32,7 @@ class MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    var questions = [
+    const questions = [
       {
         'questionText': 'What\'s your favorite color?',
         'answer': ['Black', 'red', 'blue']
@@ -45,10 +45,6 @@ class MyAppState extends State<MyApp> {
         'questionText': 'What\'s your favorite superhero?',
         'answer': ['Ironman ', 'Thor ', 'Captain America']
       },
-      {
-        'questionText': 'Restart your game',
-        'answer': ['']
-      },
     ];
 
     return MaterialApp(
@@ -56,15 +52,9 @@ class MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Quitz App'),
         ),
-        body: Column(
-          children: [
-            Question(questions[questionIndex]['questionText'].toString()),
-            ...(questions[questionIndex]['answer'] as List<String>)
-                .map((answer) {
-              return Answer(answerQuestion, answer);
-            }).toList()
-          ],
-        ),
+        body: questionIndex < questions.length
+            ? Quiz(answerQuestion, questions, questionIndex)
+            : Result(),
         floatingActionButton: FloatingActionButton(
           onPressed: restart,
           child: const Icon(
