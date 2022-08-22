@@ -7,11 +7,9 @@ import 'result.dart';
 //   runApp(const MyApp());
 // }
 
-void main() => runApp(const MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   State<StatefulWidget> createState() {
     return MyAppState();
