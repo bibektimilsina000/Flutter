@@ -33,6 +33,9 @@ class MyHomePage extends StatelessWidget {
     ),
   ];
 
+  late String inputTitle;
+  late String inputAmount;
+
   MyHomePage({Key? key}) : super(key: key);
 
   @override
@@ -53,48 +56,67 @@ class MyHomePage extends StatelessWidget {
               child: Text('CHART!'),
             ),
           ),
-
-
-          Container(
-            margin: const EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              
-              children: [
-                const TextField(decoration: InputDecoration(hintText: 'Title'),),
-                const TextField(decoration: InputDecoration(hintText: 'date'),),
-                TextButton(onPressed: (){}, child: const Text('Add Transection')),
-              ],
+          Card(
+            elevation: 5,
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  TextField(
+                      decoration: const InputDecoration(labelText: 'Title'),
+                      onChanged: (value) => inputTitle = value,
+                      cursorColor: Colors.purple),
+                  TextField(
+                      decoration: InputDecoration(labelText: 'Amount'),
+                      onChanged: (value) => inputAmount = value,
+                      cursorColor: Colors.purple),
+                  TextButton(
+                      onPressed: () {
+                        print(inputTitle);
+                        print(inputAmount);
+                      },
+                      child: const Text(
+                        'Add Transection',
+                        style: TextStyle(color: Colors.purple),
+                      )),
+                ],
+              ),
             ),
           ),
-
-
           Column(
             children: transactions.map((txt) {
               return Card(
                 child: Row(
                   children: [
                     Container(
-
-                      margin: const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
-                      decoration: BoxDecoration(border: Border.all(width: 2,color:Colors.purple)),
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 15, vertical: 10),
+                      decoration: BoxDecoration(
+                          border: Border.all(width: 2, color: Colors.purple)),
                       padding: const EdgeInsets.all(10),
-
-
-
                       child: Text(
-                        
-                         'Rs: ${txt.amount}',
-                        style: const TextStyle(color: Colors.purple,fontWeight: FontWeight.bold,fontSize: 20),
+                        'Rs: ${txt.amount}',
+                        style: const TextStyle(
+                            color: Colors.purple,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
                       ),
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        
-                      Text(txt.title,style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 16), ),
-                      Text( DateFormat.yMMMd().format(txt.date) ,style: const TextStyle(color: Colors.grey),)
-                    ],)
+                        Text(
+                          txt.title,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16),
+                        ),
+                        Text(
+                          DateFormat.yMMMd().format(txt.date),
+                          style: const TextStyle(color: Colors.grey),
+                        )
+                      ],
+                    )
                   ],
                 ),
               );
