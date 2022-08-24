@@ -67,7 +67,7 @@ class MyHomePage extends StatelessWidget {
 
                       child: Text(
                         
-                        txt.amount.toString(),
+                         'Rs: ${txt.amount}',
                         style: const TextStyle(color: Colors.purple,fontWeight: FontWeight.bold,fontSize: 20),
                       ),
                     ),
