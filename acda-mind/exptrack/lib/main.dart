@@ -33,8 +33,8 @@ class MyHomePage extends StatelessWidget {
     ),
   ];
 
-  late String inputTitle;
-  late String inputAmount;
+  final titleControl = TextEditingController();
+  final amountControl = TextEditingController();
 
   MyHomePage({Key? key}) : super(key: key);
 
@@ -65,16 +65,16 @@ class MyHomePage extends StatelessWidget {
                 children: [
                   TextField(
                       decoration: const InputDecoration(labelText: 'Title'),
-                      onChanged: (value) => inputTitle = value,
+                      controller: titleControl,
                       cursorColor: Colors.purple),
                   TextField(
-                      decoration: InputDecoration(labelText: 'Amount'),
-                      onChanged: (value) => inputAmount = value,
+                      decoration: const InputDecoration(labelText: 'Amount'),
+                      controller: amountControl,
                       cursorColor: Colors.purple),
                   TextButton(
                       onPressed: () {
-                        print(inputTitle);
-                        print(inputAmount);
+                        print(titleControl.text);
+                        print(amountControl.text);
                       },
                       child: const Text(
                         'Add Transection',
