@@ -4,6 +4,7 @@ import './widgets/transactions_list.dart';
 import './widgets/new_transaction.dart';
 import './models/transaction.dart';
 
+//
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
