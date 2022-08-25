@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 
-class NewTransaction extends StatelessWidget {
+class NewTransaction extends StatefulWidget {
   late final Function addTranx;
 
   NewTransaction(this.addTranx);
 
+  @override
+  State<NewTransaction> createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
   final titleControl = TextEditingController();
+
   final amountControl = TextEditingController();
 
   void submmitData() {
@@ -15,8 +21,10 @@ class NewTransaction extends StatelessWidget {
     if (entredTitle.isEmpty || entredAmount <= 0) {
       print('invalid input');
     } else {
-      addTranx(entredTitle, entredAmount);
+      widget.addTranx(entredTitle, entredAmount);
     }
+
+    Navigator.of(context).pop();
   }
 
   @override
