@@ -25,7 +25,7 @@ class _NewTransactionState extends State<NewTransaction> {
 
     if (entredTitle.isEmpty || entredAmount <= 0) {
     } else {
-      widget.addTranx(entredTitle, entredAmount);
+      widget.addTranx(entredTitle, entredAmount, choosenDate);
     }
 
     Navigator.of(context).pop();
