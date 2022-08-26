@@ -19,7 +19,15 @@ class MyApp extends StatelessWidget {
       home: const MyHomePage(),
       theme: ThemeData(
         primarySwatch: Colors.purple,
+        accentColor: Colors.amber,
         fontFamily: 'OpenSans',
+        textTheme: ThemeData.light().textTheme.copyWith(
+              titleLarge: const TextStyle(
+                fontFamily: 'OpenSans',
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
       ),
     );
   }
@@ -101,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Chart(transactions),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             TransactionsList(recentTransaction),
