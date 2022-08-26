@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import './widgets/transactions_list.dart';
 import './widgets/new_transaction.dart';
+import './widgets/chart.dart';
+
 import './models/transaction.dart';
 
 void main() => runApp(const MyApp());
@@ -40,31 +42,41 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   final List<Transaction> transactions = [
-    Transaction(
-      id: 't1',
-      title: 'New Shoes',
-      amount: 69.99,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Weekly Groceries',
-      amount: 16.53,
-      date: DateTime.now(),
-    ),
+    // Transaction(
+    //   id: 't1',
+    //   title: 'New Shoes',
+    //   amount: 69.99,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't2',
+    //   title: 'Weekly Groceries',
+    //   amount: 16.53,
+    //   date: DateTime.now(),
+    // ),
   ];
 
-  void addTranx(String title, double amount) {
+  void addTranx(String title, double amount, DateTime date) {
     final newtx = Transaction(
       title: title,
       amount: amount,
-      date: DateTime.now(),
-      id: DateTime.now().toString(),
+      date: date,
+      id: date.toString(),
     );
 
     setState(() {
       transactions.add(newtx);
     });
+  }
+
+  List<Transaction> get recentTransaction {
+    return transactions.where((element) {
+      return element.date.isAfter(
+        DateTime.now().subtract(
+          const Duration(days: 7),
+        ),
+      );
+    }).toList();
   }
 
   @override
@@ -88,15 +100,11 @@ class _MyHomePageState extends State<MyHomePage> {
           // mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              width: double.infinity,
-              child: const Card(
-                color: Colors.blue,
-                elevation: 5,
-                child: Text('CHART!'),
-              ),
+            Chart(transactions),
+            SizedBox(
+              height: 30,
             ),
-            TransactionsList(transactions),
+            TransactionsList(recentTransaction),
           ],
         ),
       ),

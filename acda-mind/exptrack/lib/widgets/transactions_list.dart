@@ -5,52 +5,59 @@ import '../models/transaction.dart';
 class TransactionsList extends StatelessWidget {
   final List<Transaction> transaction;
 
-  const TransactionsList(this.transaction);
+  TransactionsList(this.transaction);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 500,
-      child: ListView.builder(
-        itemCount: transaction.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Card(
-            child: Row(
+      height: 600,
+      child: transaction.isEmpty
+          ? Column(
               children: [
-                Container(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                          width: 2, color: Theme.of(context).primaryColor)),
-                  padding: const EdgeInsets.all(10),
-                  child: Text(
-                    'Rs: ${(transaction[index].amount).toStringAsFixed(2)}',
-                    style: TextStyle(
-                        color: Theme.of(context).primaryColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20),
-                  ),
+                Text(
+                  'No transaction added yet !',
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  height: 200,
+                  child: Image.asset('assets/images/waiting.png',
+                      fit: BoxFit.contain),
+                ),
+              ],
+            )
+          : ListView.builder(
+              itemCount: transaction.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Card(
+                  elevation: 5,
+                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      radius: 30,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: FittedBox(
+                          child: Text(
+                              'Rs: ${(transaction[index].amount).toStringAsFixed(2)}'),
+                        ),
+                      ),
+                    ),
+                    title: Text(
                       transaction[index].title,
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 16),
                     ),
-                    Text(
+                    subtitle: Text(
                       DateFormat.yMMMd().format(transaction[index].date),
                       style: const TextStyle(color: Colors.grey),
-                    )
-                  ],
-                )
-              ],
+                    ),
+                  ),
+                );
+              },
             ),
-          );
-        },
-      ),
     );
   }
 }
