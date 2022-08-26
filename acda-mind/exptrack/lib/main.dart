@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 import './widgets/transactions_list.dart';
@@ -20,6 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
         accentColor: Colors.amber,
+        errorColor: Colors.red,
         fontFamily: 'OpenSans',
         textTheme: ThemeData.light().textTheme.copyWith(
               titleLarge: const TextStyle(
@@ -87,6 +90,12 @@ class _MyHomePageState extends State<MyHomePage> {
     }).toList();
   }
 
+  void deleteTransaction(String id) {
+    setState(() {
+      transactions.removeWhere((element) => element.id == id);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,7 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(
               height: 30,
             ),
-            TransactionsList(recentTransaction),
+            TransactionsList(recentTransaction, deleteTransaction),
           ],
         ),
       ),
