@@ -56,12 +56,12 @@ class _MyHomePageState extends State<MyHomePage> {
     // ),
   ];
 
-  void addTranx(String title, double amount, DateTime date) {
+  void addTranx(String title, double amount) {
     final newtx = Transaction(
       title: title,
       amount: amount,
-      date: date,
-      id: date.toString(),
+      date: DateTime.now(),
+      id: DateTime.now().toString(),
     );
 
     setState(() {

@@ -22,10 +22,19 @@ class _NewTransactionState extends State<NewTransaction> {
   void submmitData() {
     final entredTitle = titleControl.text;
     final entredAmount = double.parse(amountControl.text);
-
-    if (entredTitle.isEmpty || entredAmount <= 0) {
+    if (amountControl.text.isEmpty) {
+      return;
+    }
+    if (entredTitle.isEmpty ||
+        entredAmount <= 0 ||
+        choosenDate.toString() == checkdate) {
+      return;
     } else {
-      widget.addTranx(entredTitle, entredAmount, choosenDate);
+      widget.addTranx(
+        entredTitle,
+        entredAmount,
+        choosenDate,
+      );
     }
 
     Navigator.of(context).pop();
