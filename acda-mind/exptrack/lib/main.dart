@@ -50,20 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
-  final List<Transaction> transactions = [
-    // Transaction(
-    //   id: 't1',
-    //   title: 'New Shoes',
-    //   amount: 69.99,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: 't2',
-    //   title: 'Weekly Groceries',
-    //   amount: 16.53,
-    //   date: DateTime.now(),
-    // ),
-  ];
+  final List<Transaction> transactions = [];
 
   void addTranx(String title, double amount, DateTime choosenDate) {
     final newtx = Transaction(
@@ -96,16 +83,22 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final appbar = AppBar(
+      title: const Text('Personal Expenses'),
+      actions: [
+        IconButton(
+          onPressed: () => startAddNewTransaction(context),
+          icon: const Icon(Icons.add),
+        )
+      ],
+    );
+
+    double height = ((MediaQuery.of(context).size.height) -
+        (appbar.preferredSize.height) -
+        2 * (MediaQuery.of(context).padding.top));
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Personal Expenses'),
-        actions: [
-          IconButton(
-            onPressed: () => startAddNewTransaction(context),
-            icon: const Icon(Icons.add),
-          )
-        ],
-      ),
+      appBar: appbar,
       floatingActionButton: FloatingActionButton(
         onPressed: () => startAddNewTransaction(context),
         child: const Icon(Icons.add),
@@ -115,11 +108,13 @@ class _MyHomePageState extends State<MyHomePage> {
           // mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Chart(transactions),
+            Container(height: height * 0.2, child: Chart(transactions)),
             const SizedBox(
               height: 30,
             ),
-            TransactionsList(recentTransaction, deleteTransaction),
+            Container(
+                height: height * 0.6,
+                child: TransactionsList(recentTransaction, deleteTransaction)),
           ],
         ),
       ),
