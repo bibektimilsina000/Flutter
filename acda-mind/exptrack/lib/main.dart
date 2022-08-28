@@ -4,6 +4,7 @@ import './widgets/transactions_list.dart';
 import './widgets/new_transaction.dart';
 import './widgets/chart.dart';
 
+//comment
 import './models/transaction.dart';
 
 void main() => runApp(const MyApp());
