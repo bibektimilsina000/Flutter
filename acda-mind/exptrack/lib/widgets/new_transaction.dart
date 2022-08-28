@@ -59,6 +59,7 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
     return Card(
       elevation: 5,
       child: SingleChildScrollView(
@@ -67,7 +68,7 @@ class _NewTransactionState extends State<NewTransaction> {
             top: 10,
             left: 10,
             right: 10,
-            bottom: MediaQuery.of(context).viewInsets.bottom + 10,
+            bottom: mediaQuery.viewInsets.bottom + 10,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -76,7 +77,7 @@ class _NewTransactionState extends State<NewTransaction> {
                   decoration: const InputDecoration(labelText: 'Title'),
                   controller: titleControl,
                   onSubmitted: (value) => submmitData(),
-                  cursorColor: Colors.purple),
+                  cursorColor: Colors.blue),
               TextField(
                   decoration: const InputDecoration(labelText: 'Amount'),
                   controller: amountControl,

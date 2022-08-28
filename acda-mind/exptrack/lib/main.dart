@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 
@@ -35,7 +37,7 @@ class MyApp extends StatelessWidget {
                 fontSize: 18,
               ),
             ),
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
             .copyWith(secondary: Colors.amber),
       ),
     );
@@ -57,6 +59,9 @@ class _MyHomePageState extends State<MyHomePage> {
           return NewTransaction(addTranx);
         });
   }
+
+  final isIos = Platform.isIOS;
+  // final isIos = true;
 
   final List<Transaction> transactions = [];
 
@@ -95,8 +100,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final isLandscape =
-        MediaQuery.of(context).orientation == Orientation.landscape;
+    final mediaQuery = MediaQuery.of(context);
+    final isLandscape = mediaQuery.orientation == Orientation.landscape;
     final appbar = AppBar(
       title: const Text('Personal Expenses'),
       actions: [
@@ -107,16 +112,18 @@ class _MyHomePageState extends State<MyHomePage> {
       ],
     );
 
-    double height = ((MediaQuery.of(context).size.height) -
+    double height = ((mediaQuery.size.height) -
         (appbar.preferredSize.height) -
-        2 * (MediaQuery.of(context).padding.top));
+        2 * (mediaQuery.padding.top));
 
     return Scaffold(
       appBar: appbar,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => startAddNewTransaction(context),
-        child: const Icon(Icons.add),
-      ),
+      floatingActionButton: isIos
+          ? Container()
+          : FloatingActionButton(
+              onPressed: () => startAddNewTransaction(context),
+              child: const Icon(Icons.add),
+            ),
       body: SingleChildScrollView(
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -128,7 +135,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text('Show chart'),
-                  Switch(
+                  Switch.adaptive(
                     value: showChart,
                     onChanged: (value) {
                       setState(() {
