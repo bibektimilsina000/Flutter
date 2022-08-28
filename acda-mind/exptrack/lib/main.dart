@@ -8,11 +8,12 @@ import './widgets/chart.dart';
 import './models/transaction.dart';
 
 void main() {
+  // WidgetsFlutterBinding.ensureInitialized
   // SystemChrome.setPreferredOrientations([
   //   DeviceOrientation.portraitUp,
   //   DeviceOrientation.portraitDown,
   // ]);
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -25,8 +26,6 @@ class MyApp extends StatelessWidget {
       title: 'Personal Expenses',
       home: const MyHomePage(),
       theme: ThemeData(
-        primarySwatch: Colors.purple,
-        accentColor: Colors.amber,
         errorColor: Colors.red,
         fontFamily: 'OpenSans',
         textTheme: ThemeData.light().textTheme.copyWith(
@@ -36,6 +35,8 @@ class MyApp extends StatelessWidget {
                 fontSize: 18,
               ),
             ),
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
+            .copyWith(secondary: Colors.amber),
       ),
     );
   }
@@ -88,6 +89,8 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  bool showChart = false;
+
   @override
   Widget build(BuildContext context) {
     final appbar = AppBar(
@@ -114,14 +117,28 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.stretch,
+
           children: <Widget>[
-            Container(height: height * 0.2, child: Chart(transactions)),
-            const SizedBox(
-              height: 30,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('Show chart'),
+                Switch(
+                  value: showChart,
+                  onChanged: (value) {
+                    setState(() {
+                      showChart = value;
+                    });
+                  },
+                )
+              ],
             ),
-            Container(
-                height: height * 0.6,
-                child: TransactionsList(recentTransaction, deleteTransaction)),
+            showChart
+                ? SizedBox(height: height, child: Chart(transactions))
+                : SizedBox(
+                    height: height,
+                    child:
+                        TransactionsList(recentTransaction, deleteTransaction)),
           ],
         ),
       ),
