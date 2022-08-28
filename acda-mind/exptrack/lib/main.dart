@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import './widgets/transactions_list.dart';
 import './widgets/new_transaction.dart';
@@ -6,7 +7,13 @@ import './widgets/chart.dart';
 
 import './models/transaction.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
