@@ -6,34 +6,39 @@ class TransactionsList extends StatelessWidget {
   final List<Transaction> transaction;
   final Function tranxdel;
 
-  TransactionsList(this.transaction, this.tranxdel);
+  const TransactionsList(this.transaction, this.tranxdel);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: transaction.isEmpty
-          ? Column(
-              children: [
-                Text(
-                  'No transaction added yet !',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  height: 200,
-                  child: Image.asset('assets/images/waiting.png',
-                      fit: BoxFit.contain),
-                ),
-              ],
+          ? LayoutBuilder(
+              builder: (BuildContext context, BoxConstraints constraints) {
+                return Column(
+                  children: [
+                    Text(
+                      'No transaction added yet !',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    SizedBox(
+                      height: constraints.maxHeight * 0.6,
+                      child: Image.asset('assets/images/waiting.png',
+                          fit: BoxFit.contain),
+                    ),
+                  ],
+                );
+              },
             )
           : ListView.builder(
               itemCount: transaction.length,
               itemBuilder: (BuildContext context, int index) {
                 return Card(
                   elevation: 5,
-                  margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                  margin:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
                   child: ListTile(
                     leading: CircleAvatar(
                       radius: 30,

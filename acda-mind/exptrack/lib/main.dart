@@ -91,8 +91,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   bool showChart = false;
 
+  //widgets
+
   @override
   Widget build(BuildContext context) {
+    final isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     final appbar = AppBar(
       title: const Text('Personal Expenses'),
       actions: [
@@ -119,26 +123,35 @@ class _MyHomePageState extends State<MyHomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
 
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('Show chart'),
-                Switch(
-                  value: showChart,
-                  onChanged: (value) {
-                    setState(() {
-                      showChart = value;
-                    });
-                  },
-                )
-              ],
-            ),
-            showChart
-                ? SizedBox(height: height, child: Chart(transactions))
-                : SizedBox(
-                    height: height,
-                    child:
-                        TransactionsList(recentTransaction, deleteTransaction)),
+            if (isLandscape)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Show chart'),
+                  Switch(
+                    value: showChart,
+                    onChanged: (value) {
+                      setState(() {
+                        showChart = value;
+                      });
+                    },
+                  )
+                ],
+              ),
+            if (!isLandscape)
+              SizedBox(height: height * 0.2, child: Chart(transactions)),
+            if (!isLandscape)
+              SizedBox(
+                  height: height,
+                  child:
+                      TransactionsList(recentTransaction, deleteTransaction)),
+            if (isLandscape)
+              showChart
+                  ? SizedBox(height: height, child: Chart(transactions))
+                  : SizedBox(
+                      height: height,
+                      child: TransactionsList(
+                          recentTransaction, deleteTransaction)),
           ],
         ),
       ),
