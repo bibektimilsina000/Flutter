@@ -1,4 +1,4 @@
-// import 'dart:io'; for platform detection
+import 'dart:io'; // for platform detection
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
@@ -60,8 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
-  // final isIos = Platform.isIOS;
-  final isIos = true;
+  final isIos = Platform.isIOS;
 
   final List<Transaction> transactions = [];
 
@@ -184,6 +183,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     onPressed: () => startAddNewTransaction(context),
                     child: const Icon(Icons.add),
                   ),
+            body: bodyContent,
           );
   }
 }

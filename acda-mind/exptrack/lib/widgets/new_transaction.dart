@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:exptrack/widgets/adaptive_flat_button.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -12,7 +12,6 @@ class NewTransaction extends StatefulWidget {
 }
 
 class _NewTransactionState extends State<NewTransaction> {
-  bool isIos = true;
   final titleControl = TextEditingController();
 
   final amountControl = TextEditingController();
@@ -97,19 +96,7 @@ class _NewTransactionState extends State<NewTransaction> {
                         style: TextStyle(color: Theme.of(context).primaryColor),
                       ),
                     ),
-                    isIos
-                        ? CupertinoButton(
-                            onPressed: presetDatePicker,
-                            child: const Text('choose date'))
-                        : TextButton(
-                            onPressed: presetDatePicker,
-                            child: const Padding(
-                              padding: EdgeInsets.all(8.0),
-                              child: Text(
-                                'Choose Date',
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                            )),
+                    AdaptiveButton('Choose Date', presetDatePicker)
                   ],
                 ),
               ),
