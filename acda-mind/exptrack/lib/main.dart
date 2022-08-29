@@ -127,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     double height = ((mediaQuery.size.height) -
         (appbar.preferredSize.height) -
-        2 * (mediaQuery.padding.top));
+        (mediaQuery.padding.top));
 
     final bodyContent = SafeArea(
       child: SingleChildScrollView(
@@ -152,10 +152,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             if (!isLandscape)
-              SizedBox(height: height * 0.2, child: Chart(transactions)),
+              SizedBox(height: height * 0.25, child: Chart(transactions)),
             if (!isLandscape)
               SizedBox(
-                  height: height,
+                  height: height * 0.75,
                   child:
                       TransactionsList(recentTransaction, deleteTransaction)),
             if (isLandscape)
