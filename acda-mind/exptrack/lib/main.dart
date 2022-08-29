@@ -1,5 +1,5 @@
-import 'dart:io';
-
+// import 'dart:io'; for platform detection
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 
@@ -60,8 +60,8 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
-  final isIos = Platform.isIOS;
-  // final isIos = true;
+  // final isIos = Platform.isIOS;
+  final isIos = true;
 
   final List<Transaction> transactions = [];
 
@@ -102,29 +102,36 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
     final isLandscape = mediaQuery.orientation == Orientation.landscape;
-    final appbar = AppBar(
-      title: const Text('Personal Expenses'),
-      actions: [
-        IconButton(
-          onPressed: () => startAddNewTransaction(context),
-          icon: const Icon(Icons.add),
-        )
-      ],
-    );
+
+    final dynamic appbar = isIos
+        ? CupertinoNavigationBar(
+            middle: const Text('Personal Expenses'),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                GestureDetector(
+                  child: const Icon(CupertinoIcons.add),
+                  onTap: () => startAddNewTransaction(context),
+                )
+              ],
+            ),
+          )
+        : AppBar(
+            title: const Text('Personal Expenses'),
+            actions: [
+              IconButton(
+                onPressed: () => startAddNewTransaction(context),
+                icon: const Icon(Icons.add),
+              )
+            ],
+          );
 
     double height = ((mediaQuery.size.height) -
         (appbar.preferredSize.height) -
         2 * (mediaQuery.padding.top));
 
-    return Scaffold(
-      appBar: appbar,
-      floatingActionButton: isIos
-          ? Container()
-          : FloatingActionButton(
-              onPressed: () => startAddNewTransaction(context),
-              child: const Icon(Icons.add),
-            ),
-      body: SingleChildScrollView(
+    final bodyContent = SafeArea(
+      child: SingleChildScrollView(
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -163,5 +170,20 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+
+    return isIos
+        ? CupertinoPageScaffold(
+            navigationBar: appbar,
+            child: bodyContent,
+          )
+        : Scaffold(
+            appBar: appbar,
+            floatingActionButton: isIos
+                ? Container()
+                : FloatingActionButton(
+                    onPressed: () => startAddNewTransaction(context),
+                    child: const Icon(Icons.add),
+                  ),
+          );
   }
 }
