@@ -9,6 +9,8 @@ class ChartBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         return Column(
@@ -22,7 +24,7 @@ class ChartBar extends StatelessWidget {
             ),
             SizedBox(
               height: constraints.maxHeight * 0.6,
-              width: 10,
+              width: isLandscape ? 30 : 10,
               child: Stack(
                 children: [
                   Container(
