@@ -100,7 +100,7 @@ class _NewTransactionState extends State<NewTransaction> {
                     isIos
                         ? CupertinoButton(
                             onPressed: presetDatePicker,
-                            child: Text('choose date') )
+                            child: const Text('choose date'))
                         : TextButton(
                             onPressed: presetDatePicker,
                             child: const Padding(
