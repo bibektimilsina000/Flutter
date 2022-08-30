@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:io'; // for platform detection
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
@@ -132,7 +132,9 @@ class _MyHomePageState extends State<MyHomePage> {
     final bodyContent = SafeArea(
       child: SingleChildScrollView(
         child: Column(
+          // mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.stretch,
+
           children: <Widget>[
             if (isLandscape)
               Row(
