@@ -7,7 +7,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,8 +25,8 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('data')),
-      body: Home(),
+      appBar: AppBar(title: const Text('data')),
+      body: const Home(),
     );
   }
 }
@@ -44,8 +43,8 @@ class Home extends StatelessWidget {
           fit: FlexFit.tight,
           child: Container(
             height: 100,
-            child: Text('item 1'),
             color: Colors.red,
+            child: const Text('item 1'),
           ),
         ),
         Flexible(
@@ -53,13 +52,13 @@ class Home extends StatelessWidget {
           child: Container(
             height: 100,
             color: Colors.yellow,
-            child: Text('item 1 - the red container'),
+            child: const Text('item 1 - the red container'),
           ),
         ),
         Container(
           height: 100,
           color: Colors.blue,
-          child: Text('item 1'),
+          child: const Text('item 1'),
         ),
       ],
     );
