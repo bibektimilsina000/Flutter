@@ -44,8 +44,8 @@ class Home extends StatelessWidget {
           fit: FlexFit.tight,
           child: Container(
             height: 100,
-            color: Colors.red,
-            child: Text('item 1'),
+            color: Colors.black,
+            child: const Text('item 1'),
           ),
         ),
         Flexible(
