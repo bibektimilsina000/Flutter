@@ -62,6 +62,14 @@ class Home extends StatelessWidget {
           child: const Text('item 1'),
         ),
       ],
+          ),
+        ),
+        Container(
+          height: 100,
+          color: Colors.blue,
+          child: const Text('item 1'),
+        ),
+      ],
     );
   }
 }
