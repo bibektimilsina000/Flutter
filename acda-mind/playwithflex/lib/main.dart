@@ -55,13 +55,7 @@ class Home extends StatelessWidget {
             color: Colors.yellow,
             child: const Text('item 1 - the red container'),
           ),
-        ),
-        Container(
-          height: 100,
-          color: Colors.blue,
-          child: const Text('item 1'),
-        ),
-      ],
+      
     );
   }
 }
