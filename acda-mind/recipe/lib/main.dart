@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'screens/category_screen.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -11,13 +13,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const HomeApp(),
+      home: const MyHomePage(),
     );
   }
 }
 
-class HomeApp extends StatelessWidget {
-  const HomeApp({super.key});
+class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +27,7 @@ class HomeApp extends StatelessWidget {
       appBar: AppBar(
         title: const Text('recipe'),
       ),
-      body: const Center(
-        child: Text('Navigation started'),
-      ),
+      body: const Category(),
     );
   }
 }
