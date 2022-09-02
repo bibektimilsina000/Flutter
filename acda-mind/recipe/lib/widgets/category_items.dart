@@ -11,6 +11,7 @@ class CategoryItems extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
         gradient: LinearGradient(
             colors: [color.withOpacity(0.7), color],
             begin: Alignment.topLeft,
