@@ -13,11 +13,11 @@ class CategoryItems extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         gradient: LinearGradient(
-            colors: [color.withOpacity(0.7), color],
+            colors: [color, color.withOpacity(0.7)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight),
       ),
-      child: Text(title),
+      child: Text(title, style: Theme.of(context).textTheme.headline1),
     );
   }
 }
