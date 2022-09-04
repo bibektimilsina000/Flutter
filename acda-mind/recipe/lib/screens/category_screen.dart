@@ -25,6 +25,7 @@ class Category extends StatelessWidget {
         children: <Widget>[
           ...DUMMY_CATEGORIES
               .map((data) => CategoryItems(
+                    data.id,
                     data.title,
                     data.color,
                   ))
