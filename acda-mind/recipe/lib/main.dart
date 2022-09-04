@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:recipe/screens/category_item_screen.dart';
+import '../screens/category_item_screen.dart';
 
 import 'screens/category_screen.dart';
 
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
               .copyWith(secondary: Colors.amber)),
       home: const Category(),
       routes: {
-        '/category-item-list': (context) => CategoryItemList(),
+        CategoryItemList.categoryItemList: (context) => CategoryItemList(),
       },
     );
   }

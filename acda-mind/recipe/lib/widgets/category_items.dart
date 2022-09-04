@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../screens/category_item_screen.dart';
 
 class CategoryItems extends StatelessWidget {
   final String id;
@@ -8,7 +9,7 @@ class CategoryItems extends StatelessWidget {
   const CategoryItems(this.id, this.title, this.color);
 
   void selectCategory(BuildContext ctx) {
-    Navigator.of(ctx).pushNamed('/category-item-list',
+    Navigator.of(ctx).pushNamed(CategoryItemList.categoryItemList,
         arguments: {'id': id, 'title': title});
   }
 

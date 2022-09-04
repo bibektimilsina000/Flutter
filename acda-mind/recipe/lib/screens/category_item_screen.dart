@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CategoryItemList extends StatelessWidget {
+  static const categoryItemList = 'category-item-list';
   // final String categoryId;
   // final String categoryTitle;
   // final Color categoryColor;
