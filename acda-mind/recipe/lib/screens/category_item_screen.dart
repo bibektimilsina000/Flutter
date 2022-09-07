@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../models/dummy_data.dart';
+
 class CategoryItemList extends StatelessWidget {
   static const categoryItemList = 'category-item-list';
   // final String categoryId;
@@ -18,15 +20,22 @@ class CategoryItemList extends StatelessWidget {
         ModalRoute.of(context)?.settings.arguments as Map<String, String>;
 
     String categoryTitle = argRoutes['title'] as String;
+    String categoryId = argRoutes['id'] as String;
+
+    final categoryMeals = DUMMY_MEALS.where((meal) {
+      return meal.categories.contains(categoryId);
+    }).toList();
 
     return Scaffold(
       appBar: AppBar(
         title: Text(categoryTitle),
       ),
-      body: Center(
-          child: Container(
-        child: const Text('Category item'),
-      )),
+      body: ListView.builder(
+        itemCount: categoryMeals.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Text(categoryMeals[index].title);
+        },
+      ),
     );
   }
 }
