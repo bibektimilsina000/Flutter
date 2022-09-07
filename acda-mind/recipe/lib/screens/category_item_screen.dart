@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/dummy_data.dart';
+import '../widgets/meal_item.dart';
 
 class CategoryItemList extends StatelessWidget {
   static const categoryItemList = 'category-item-list';
@@ -33,7 +34,13 @@ class CategoryItemList extends StatelessWidget {
       body: ListView.builder(
         itemCount: categoryMeals.length,
         itemBuilder: (BuildContext context, int index) {
-          return Text(categoryMeals[index].title);
+          return MealItem(
+            title: categoryMeals[index].title,
+            imageUrl: categoryMeals[index].imageUrl,
+            duration: categoryMeals[index].duration,
+            affordability: categoryMeals[index].affordability,
+            complexity: categoryMeals[index].complexity,
+          );
         },
       ),
     );
