@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       home: const Category(),
       routes: {
         CategoryItemList.categoryItemList: (context) => CategoryItemList(),
-        MealDetail.mealDetail: (context) => const MealDetail(),
+        MealDetail.mealDetail: (context) => MealDetail(),
       },
     );
   }
