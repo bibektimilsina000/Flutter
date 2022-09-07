@@ -28,8 +28,8 @@ class MyApp extends StatelessWidget {
               .copyWith(secondary: Colors.amber)),
       home: const Category(),
       routes: {
-        CategoryItemList.categoryItemList: (context) => CategoryItemList(),
-        MealDetail.mealDetail: (context) => MealDetail(),
+        CategoryItemList.routeName: (context) => CategoryItemList(),
+        MealDetail.routeName: (context) => MealDetail(),
       },
     );
   }

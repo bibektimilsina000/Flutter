@@ -4,7 +4,7 @@ import '../models/dummy_data.dart';
 import '../widgets/meal_item.dart';
 
 class CategoryItemList extends StatelessWidget {
-  static const categoryItemList = 'category-item-list';
+  static const routeName = 'category-item-list';
   // final String categoryId;
   // final String categoryTitle;
   // final Color categoryColor;
@@ -35,6 +35,7 @@ class CategoryItemList extends StatelessWidget {
         itemCount: categoryMeals.length,
         itemBuilder: (BuildContext context, int index) {
           return MealItem(
+            id: categoryMeals[index].id,
             title: categoryMeals[index].title,
             imageUrl: categoryMeals[index].imageUrl,
             duration: categoryMeals[index].duration,

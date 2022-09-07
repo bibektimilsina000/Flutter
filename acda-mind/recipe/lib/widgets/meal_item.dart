@@ -5,6 +5,7 @@ import '../models/meal.dart';
 import '../screens/meal_detail_screen.dart';
 
 class MealItem extends StatelessWidget {
+  final String id;
   final String title;
   final String imageUrl;
   final int duration;
@@ -13,11 +14,13 @@ class MealItem extends StatelessWidget {
 
   const MealItem({
     super.key,
+    required this.id,
     required this.title,
     required this.imageUrl,
     required this.duration,
     required this.affordability,
     required this.complexity,
+    s,
   });
 
   String get complexityText {
@@ -50,11 +53,8 @@ class MealItem extends StatelessWidget {
 
   void selectMeal(BuildContext ctx) {
     Navigator.of(ctx).pushNamed(
-      MealDetail.mealDetail,
-      arguments: {
-        'title': title,
-        'imageUrl': imageUrl,
-      },
+      MealDetail.routeName,
+      arguments: id,
     );
   }
 
