@@ -30,19 +30,17 @@ class MealDetail extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(10),
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(15)),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-              ),
-            ),
-            SizedBox(
-              height: 300,
-              width: double.infinity,
-              child: Image.network(
-                selectedMeal.imageUrl,
-                fit: BoxFit.cover,
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(15)),
+                child: Image.network(
+                  selectedMeal.imageUrl,
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
             Container(
@@ -58,7 +56,7 @@ class MealDetail extends StatelessWidget {
                     margin: const EdgeInsets.symmetric(vertical: 0),
                     padding: const EdgeInsets.all(5),
                     height: 200,
-                    width: 300,
+                    width: 350,
                     child: ListView.builder(
                       itemCount: selectedMeal.ingredients.length,
                       itemBuilder: (BuildContext context, int index) {
@@ -93,13 +91,25 @@ class MealDetail extends StatelessWidget {
                     margin: const EdgeInsets.symmetric(vertical: 0),
                     padding: const EdgeInsets.all(5),
                     height: 200,
-                    width: 300,
-                    child:ListView.builder(
+                    width: 350,
+                    child: ListView.builder(
                       itemCount: selectedMeal.steps.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return ;
+                        return Column(
+                          children: [
+                            ListTile(
+                              leading: CircleAvatar(
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.secondary,
+                                child: Text('${index + 1}'),
+                              ),
+                              title: Text(selectedMeal.steps[index]),
+                            ),
+                            const Divider()
+                          ],
+                        );
                       },
-                    ), ,
+                    ),
                   ),
                 ],
               ),

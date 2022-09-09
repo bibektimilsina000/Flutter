@@ -6,54 +6,64 @@ import './meal.dart';
 
 const DUMMY_CATEGORIES = [
   Category(
-    id: 'c1',
-    title: 'Italian',
-    color: Colors.purple,
-  ),
+      id: 'c1',
+      title: 'Italian',
+      color: Colors.purple,
+      imageUrl:
+          'https://www.hotelmousai.com/blog/wp-content/uploads/2021/12/Top-10-Traditional-Foods-in-Italy-1140x694.jpg'),
   Category(
     id: 'c2',
     title: 'Quick & Easy',
     color: Colors.red,
+    imageUrl: '',
   ),
   Category(
     id: 'c3',
     title: 'Hamburgers',
     color: Colors.orange,
+    imageUrl: '',
   ),
   Category(
     id: 'c4',
     title: 'German',
     color: Colors.amber,
+    imageUrl: '',
   ),
   Category(
     id: 'c5',
     title: 'Light & Lovely',
     color: Colors.blue,
+    imageUrl: '',
   ),
   Category(
     id: 'c6',
     title: 'Exotic',
     color: Colors.green,
+    imageUrl: '',
   ),
   Category(
     id: 'c7',
     title: 'Breakfast',
     color: Colors.lightBlue,
+    imageUrl: '',
   ),
   Category(
     id: 'c8',
     title: 'Asian',
     color: Colors.lightGreen,
+    imageUrl: '',
   ),
   Category(
     id: 'c9',
     title: 'French',
     color: Colors.pink,
+    imageUrl: '',
   ),
   Category(
     id: 'c10',
     title: 'Summer',
     color: Colors.teal,
+    imageUrl: '',
   ),
 ];
 
