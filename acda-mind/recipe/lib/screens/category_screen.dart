@@ -15,12 +15,12 @@ class Category extends StatelessWidget {
         title: const Text('Recipe'),
       ),
       body: GridView(
-        padding: const EdgeInsets.all(22),
+        padding: const EdgeInsets.all(10),
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 200,
-          childAspectRatio: 3 / 2,
-          mainAxisSpacing: 20,
-          crossAxisSpacing: 20,
+          maxCrossAxisExtent: 300,
+          childAspectRatio: 3 / 2.15,
+          mainAxisSpacing: 15,
+          crossAxisSpacing: 15,
         ),
         children: <Widget>[
           ...DUMMY_CATEGORIES
