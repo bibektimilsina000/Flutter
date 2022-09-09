@@ -35,7 +35,8 @@ const DUMMY_CATEGORIES = [
     id: 'c5',
     title: 'Light & Lovely',
     color: Colors.blue,
-    imageUrl: '',
+    imageUrl:
+        'https://cdn2.stylecraze.com/wp-content/uploads/2015/06/2-Proteinaceous-Tuna-Veggie-Omelet.jpg.webp',
   ),
   Category(
     id: 'c6',

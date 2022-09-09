@@ -28,6 +28,7 @@ class Category extends StatelessWidget {
                     data.id,
                     data.title,
                     data.color,
+                    data.imageUrl,
                   ))
               .toList()
         ],

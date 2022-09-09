@@ -5,8 +5,9 @@ class CategoryItems extends StatelessWidget {
   final String id;
   final String title;
   final Color color;
+  final String imageUrl;
 
-  const CategoryItems(this.id, this.title, this.color);
+  const CategoryItems(this.id, this.title, this.color, this.imageUrl);
 
   void selectCategory(BuildContext ctx) {
     Navigator.of(ctx).pushNamed(CategoryItemList.routeName,
@@ -20,7 +21,6 @@ class CategoryItems extends StatelessWidget {
       splashColor: Theme.of(context).primaryColor,
       borderRadius: BorderRadius.circular(15),
       child: Container(
-        padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           gradient: LinearGradient(
@@ -28,7 +28,37 @@ class CategoryItems extends StatelessWidget {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight),
         ),
-        child: Text(title, style: Theme.of(context).textTheme.headline1),
+        child: Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Image.network(
+                imageUrl,
+                height: 250,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Positioned(
+              child: Center(
+                child: Container(
+                  color: Colors.black54,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  child: Text(
+                    title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 26,
+                    ),
+                    softWrap: true,
+                    overflow: TextOverflow.fade,
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
