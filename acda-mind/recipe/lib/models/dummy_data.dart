@@ -15,19 +15,21 @@ const DUMMY_CATEGORIES = [
     id: 'c2',
     title: 'Quick & Easy',
     color: Colors.red,
-    imageUrl: '',
+    imageUrl:
+        'https://img.buzzfeed.com/buzzfeed-static/static/2020-06/11/14/asset/dcb5220da65d/sub-buzz-86-1591886919-8.jpg',
   ),
   Category(
     id: 'c3',
     title: 'Hamburgers',
     color: Colors.orange,
-    imageUrl: '',
+    imageUrl:
+        'https://facts.net/wp-content/uploads/2021/06/hamburger-with-fries-300x205.jpg',
   ),
   Category(
     id: 'c4',
     title: 'German',
     color: Colors.amber,
-    imageUrl: '',
+    imageUrl: 'https://blog.wego.com/wp-content/uploads/Schnitzel_qfryve.jpg',
   ),
   Category(
     id: 'c5',
@@ -39,31 +41,35 @@ const DUMMY_CATEGORIES = [
     id: 'c6',
     title: 'Exotic',
     color: Colors.green,
-    imageUrl: '',
+    imageUrl:
+        'https://cdn.pixabay.com/photo/2017/05/01/05/18/pastry-2274750_1280.jpg',
   ),
   Category(
     id: 'c7',
     title: 'Breakfast',
     color: Colors.lightBlue,
-    imageUrl: '',
+    imageUrl:
+        'https://simply-delicious-food.com/wp-content/uploads/2018/10/breakfast-board.jpg',
   ),
   Category(
     id: 'c8',
     title: 'Asian',
     color: Colors.lightGreen,
-    imageUrl: '',
+    imageUrl:
+        'https://thumbs.dreamstime.com/b/asian-food-table-various-kind-chinese-food-noodles-chicken-pork-beef-sour-soup-rice-spring-rolls-sushi-prawns-many-89053131.jpg',
   ),
   Category(
     id: 'c9',
     title: 'French',
     color: Colors.pink,
-    imageUrl: '',
+    imageUrl: 'https://www.chefspencil.com/wp-content/uploads/French-Foods.jpg',
   ),
   Category(
     id: 'c10',
     title: 'Summer',
     color: Colors.teal,
-    imageUrl: '',
+    imageUrl:
+        'https://potatorolls.com/wp-content/uploads/2020/06/Summer-Food-Drink-Pairing.jpg',
   ),
 ];
 
