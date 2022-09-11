@@ -32,7 +32,7 @@ class CategoryItems extends StatelessWidget {
                   topLeft: Radius.circular(5),
                   topRight: Radius.circular(5),
                 ),
-                child: Image.network(
+                child: Image.asset(
                   imageUrl,
                   height: 100,
                   width: double.infinity,

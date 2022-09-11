@@ -6,71 +6,64 @@ import './meal.dart';
 
 const DUMMY_CATEGORIES = [
   Category(
-      id: 'c1',
-      title: 'Italian',
-      color: Colors.purple,
-      imageUrl:
-          'https://www.hotelmousai.com/blog/wp-content/uploads/2021/12/Top-10-Traditional-Foods-in-Italy-1140x694.jpg'),
+    id: 'c1',
+    title: 'Italian',
+    color: Colors.purple,
+    imageUrl: 'Assets/Images/italian.jpg',
+  ),
   Category(
     id: 'c2',
     title: 'Quick & Easy',
     color: Colors.red,
-    imageUrl:
-        'https://img.buzzfeed.com/buzzfeed-static/static/2020-06/11/14/asset/dcb5220da65d/sub-buzz-86-1591886919-8.jpg',
+    imageUrl: 'Assets/Images/quick.jpg',
   ),
   Category(
     id: 'c3',
     title: 'Hamburgers',
     color: Colors.orange,
-    imageUrl:
-        'https://facts.net/wp-content/uploads/2021/06/hamburger-with-fries-300x205.jpg',
+    imageUrl: 'Assets/Images/hamburger.jpg',
   ),
   Category(
     id: 'c4',
     title: 'German',
     color: Colors.amber,
-    imageUrl: 'https://blog.wego.com/wp-content/uploads/Schnitzel_qfryve.jpg',
+    imageUrl: 'Assets/Images/german.jpg',
   ),
   Category(
     id: 'c5',
     title: 'Light & Lovely',
     color: Colors.blue,
-    imageUrl:
-        'https://cdn2.stylecraze.com/wp-content/uploads/2015/06/2-Proteinaceous-Tuna-Veggie-Omelet.jpg.webp',
+    imageUrl: 'Assets/Images/light.webp',
   ),
   Category(
     id: 'c6',
     title: 'Exotic',
     color: Colors.green,
-    imageUrl:
-        'https://cdn.pixabay.com/photo/2017/05/01/05/18/pastry-2274750_1280.jpg',
+    imageUrl: 'Assets/Images/exotic.jpg',
   ),
   Category(
     id: 'c7',
     title: 'Breakfast',
     color: Colors.lightBlue,
-    imageUrl:
-        'https://simply-delicious-food.com/wp-content/uploads/2018/10/breakfast-board.jpg',
+    imageUrl: 'Assets/Images/breakfast.jpg',
   ),
   Category(
     id: 'c8',
     title: 'Asian',
     color: Colors.lightGreen,
-    imageUrl:
-        'https://thumbs.dreamstime.com/b/asian-food-table-various-kind-chinese-food-noodles-chicken-pork-beef-sour-soup-rice-spring-rolls-sushi-prawns-many-89053131.jpg',
+    imageUrl: 'Assets/Images/asian.jpg',
   ),
   Category(
     id: 'c9',
     title: 'French',
     color: Colors.pink,
-    imageUrl: 'https://www.chefspencil.com/wp-content/uploads/French-Foods.jpg',
+    imageUrl: 'Assets/Images/french.webp',
   ),
   Category(
     id: 'c10',
     title: 'Summer',
     color: Colors.teal,
-    imageUrl:
-        'https://potatorolls.com/wp-content/uploads/2020/06/Summer-Food-Drink-Pairing.jpg',
+    imageUrl: 'Assets/Images/summer.jpg',
   ),
 ];
 

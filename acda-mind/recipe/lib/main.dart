@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
+import '../screens/filter_screen.dart';
 import '../screens/tab_screen.dart';
 import '../screens/category_item_screen.dart';
-
 import 'screens/meal_detail_screen.dart';
 
 void main() {
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
           fontFamily: 'Raleway',
           textTheme: ThemeData.light().textTheme.copyWith(
@@ -30,6 +32,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const Tabs(),
         CategoryItemList.routeName: (context) => CategoryItemList(),
         MealDetail.routeName: (context) => MealDetail(),
+        FiltersScreen.routerName: (context) => const FiltersScreen(),
       },
     );
   }
