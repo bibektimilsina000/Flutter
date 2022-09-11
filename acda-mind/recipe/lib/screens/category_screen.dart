@@ -10,10 +10,6 @@ class Category extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: const Icon(Icons.menu),
-        title: const Text('Recipe'),
-      ),
       body: GridView(
         padding: const EdgeInsets.all(10),
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import '../screens/tab_screen.dart';
 import '../screens/category_item_screen.dart';
 
-import 'screens/category_screen.dart';
 import 'screens/meal_detail_screen.dart';
 
 void main() {
@@ -26,8 +26,8 @@ class MyApp extends StatelessWidget {
           canvasColor: const Color.fromRGBO(255, 254, 229, 1),
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.pink)
               .copyWith(secondary: Colors.amber)),
-      home: const Category(),
       routes: {
+        '/': (context) => const Tabs(),
         CategoryItemList.routeName: (context) => CategoryItemList(),
         MealDetail.routeName: (context) => MealDetail(),
       },
