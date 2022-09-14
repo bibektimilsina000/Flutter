@@ -15,10 +15,17 @@ class Tabs extends StatefulWidget {
 }
 
 class _TabsState extends State<Tabs> {
-  final List<Map<String, dynamic>> _pages = [
-    {'pages': const Category(), 'title': 'Category'},
-    {'pages': const Favorite(), 'title': 'Your Favorite'},
-  ];
+  late List<Map<String, dynamic>> _pages;
+
+  @override
+  void initState() {
+    _pages = [
+      {'pages': const Category(), 'title': 'Category'},
+      {'pages': Favorite(widget.favMeal), 'title': 'Your Favorite'},
+    ];
+
+    super.initState();
+  }
 
   int _selectPageIndex = 0;
 
