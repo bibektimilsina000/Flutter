@@ -28,6 +28,25 @@ class _MyAppState extends State<MyApp> {
   };
 
   List<Meal> availableMeals = DUMMY_MEALS;
+  List<Meal> favMeal = [];
+
+  void touglefav(String id) {
+    final existingId = favMeal.indexWhere((element) => element.id == id);
+
+    if (existingId >= 0) {
+      setState(() {
+        favMeal.removeAt(existingId);
+      });
+    } else {
+      setState(() {
+        favMeal.add(DUMMY_MEALS.firstWhere((element) => element.id == id));
+      });
+    }
+  }
+
+  bool isInFav(String id) {
+    return favMeal.any((element) => element.id == id);
+  }
 
   void _setFilters(Map<String, bool> filterdata) {
     setState(() {
@@ -68,10 +87,10 @@ class _MyAppState extends State<MyApp> {
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.pink)
               .copyWith(secondary: Colors.amber)),
       routes: {
-        '/': (context) => const Tabs(),
+        '/': (context) => Tabs(availableMeals),
         CategoryItemList.routeName: (context) =>
             CategoryItemList(availableMeals),
-        MealDetail.routeName: (context) => MealDetail(),
+        MealDetail.routeName: (context) => MealDetail(touglefav, isInFav),
         FiltersScreen.routerName: (context) =>
             FiltersScreen(_filters, _setFilters),
       },
