@@ -55,7 +55,6 @@ class _CategoryItemListState extends State<CategoryItemList> {
             duration: DisplayedMeal[index].duration,
             affordability: DisplayedMeal[index].affordability,
             complexity: DisplayedMeal[index].complexity,
-            removeItem: _removeMeal,
           );
         },
       ),
