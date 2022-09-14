@@ -38,9 +38,7 @@ class _MyAppState extends State<MyApp> {
         favMeal.removeAt(existingId);
       });
     } else {
-      setState(() {
-        favMeal.add(DUMMY_MEALS.firstWhere((element) => element.id == id));
-      });
+      setState(() {});
     }
   }
 
