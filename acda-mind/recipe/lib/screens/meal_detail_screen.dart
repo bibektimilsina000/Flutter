@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import '../models/dummy_data.dart';
 
 class MealDetail extends StatelessWidget {
+  Function toggleMeal, isInFav;
+
+  MealDetail(this.toggleMeal, this.isInFav);
   static const routeName = 'meal-detail';
 
   Widget titleBuilder(BuildContext context, String title) {
@@ -118,9 +121,14 @@ class MealDetail extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.delete),
+        child: isInFav(mealId)
+            ? const Icon(Icons.favorite_border)
+            : const Icon(
+                Icons.favorite,
+                color: Colors.pink,
+              ),
         onPressed: () {
-          Navigator.of(context).pop(mealId);
+          toggleMeal(mealId);
         },
       ),
     );
