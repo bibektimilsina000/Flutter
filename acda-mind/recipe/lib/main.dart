@@ -38,7 +38,9 @@ class _MyAppState extends State<MyApp> {
         favMeal.removeAt(existingId);
       });
     } else {
-      setState(() {});
+      setState(() {
+        favMeal.add(DUMMY_MEALS.firstWhere((element) => element.id == id));
+      });
     }
   }
 
@@ -85,7 +87,7 @@ class _MyAppState extends State<MyApp> {
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.pink)
               .copyWith(secondary: Colors.amber)),
       routes: {
-        '/': (context) => Tabs(availableMeals),
+        '/': (context) => Tabs(favMeal),
         CategoryItemList.routeName: (context) =>
             CategoryItemList(availableMeals),
         MealDetail.routeName: (context) => MealDetail(touglefav, isInFav),
