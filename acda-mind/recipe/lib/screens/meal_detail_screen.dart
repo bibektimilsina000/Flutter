@@ -122,11 +122,11 @@ class MealDetail extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: isInFav(mealId)
-            ? const Icon(Icons.favorite_border)
-            : const Icon(
+            ? const Icon(
                 Icons.favorite,
                 color: Colors.pink,
-              ),
+              )
+            : const Icon(Icons.favorite_border),
         onPressed: () {
           toggleMeal(mealId);
         },

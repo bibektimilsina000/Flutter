@@ -54,7 +54,7 @@ class _TabsState extends State<Tabs> {
             label: 'Category',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.star),
+            icon: Icon(Icons.favorite),
             label: 'Favorite',
           ),
         ],
