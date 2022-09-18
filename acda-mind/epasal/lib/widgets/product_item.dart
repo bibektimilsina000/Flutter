@@ -20,11 +20,18 @@ class ProductItem extends StatelessWidget {
       footer: GridTileBar(
         title: Text(title),
         backgroundColor: Colors.black54,
-        leading:
-            IconButton(onPressed: (() {}), icon: const Icon(Icons.favorite)),
+        leading: IconButton(
+            onPressed: (() {}),
+            icon: Icon(
+              Icons.favorite,
+              color: Theme.of(context).colorScheme.secondary,
+            )),
         trailing: IconButton(
           onPressed: () {},
-          icon: const Icon(Icons.shopping_cart),
+          icon: Icon(
+            Icons.shopping_cart,
+            color: Theme.of(context).colorScheme.secondary,
+          ),
         ),
       ),
       child: Image.network(
