@@ -10,6 +10,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
+      theme: ThemeData(
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green)
+              .copyWith(secondary: Colors.yellow)),
       routes: {
         '/': (context) => ProductOverview(),
       },
