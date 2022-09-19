@@ -61,12 +61,12 @@ class TransactionsList extends StatelessWidget {
                       style: const TextStyle(color: Colors.grey),
                     ),
                     trailing: mediaQuery.size.width > 450
-                        // ? FlatButton.icon(
-                        //     onPressed: () => tranxdel(transaction[index].id),
-                        //     icon: const Icon(Icons.delete),
-                        //     textColor: Theme.of(context).errorColor,
-                        //     label: const Text('Delete'),
-                        //   )
+                        ? FlatButton.icon(
+                            onPressed: () => tranxdel(transaction[index].id),
+                            icon: const Icon(Icons.delete),
+                            textColor: Theme.of(context).errorColor,
+                            label: const Text('Delete'),
+                          )
                         : IconButton(
                             onPressed: () => tranxdel(transaction[index].id),
                             icon: const Icon(Icons.delete),
