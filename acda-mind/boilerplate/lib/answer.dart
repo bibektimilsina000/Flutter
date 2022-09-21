@@ -12,9 +12,7 @@ class Answer extends StatelessWidget {
       margin: const EdgeInsets.all(10),
       width: double.infinity,
       color: Colors.blue,
-      child: RaisedButton(
-        textColor: Colors.white,
-        color: Colors.blue,
+      child: ElevatedButton(
         onPressed: selectHandler,
         child: Text(answer),
       ),
