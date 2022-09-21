@@ -11,10 +11,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Material App',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green)
-            .copyWith(secondary: Colors.yellow),
-        fontFamily: 'Lato',
-      ),
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green)
+              .copyWith(secondary: Colors.yellow)),
       routes: {
         '/': (context) => ProductOverview(),
       },
