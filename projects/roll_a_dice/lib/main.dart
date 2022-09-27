@@ -23,7 +23,6 @@ class _HomePageState extends State<HomePage> {
     debugPrint('dice rolled');
     setState(() {
       state = Random().nextInt(6) + 1;
-      ;
     });
   }
 
@@ -52,15 +51,6 @@ class _HomePageState extends State<HomePage> {
                 style: TextStyle(color: Colors.white),
               ),
             ),
-            const SizedBox(height: 300),
-            const Text(
-              "Powered by : Brandtech",
-              style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  backgroundColor: Color.fromARGB(255, 103, 39, 212),
-                  color: Colors.white),
-            )
           ],
         ),
       ),
