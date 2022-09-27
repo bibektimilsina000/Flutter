@@ -1,3 +1,4 @@
+import '/screens/detail_product.dart';
 import 'package:epasal/widgets/product_item.dart';
 import 'package:flutter/material.dart';
 
@@ -57,12 +58,18 @@ class ProductOverview extends StatelessWidget {
         ),
         itemCount: lodedProducts.length,
         itemBuilder: (BuildContext context, int index) {
-          return ProductItem(
-              id: lodedProducts[index].id,
-              title: lodedProducts[index].title,
-              description: lodedProducts[index].description,
-              price: lodedProducts[index].price,
-              imageUrl: lodedProducts[index].imageUrl);
+          return GestureDetector(
+            onTap: () {
+              Navigator.of(context).pushNamed(ProductDetail.routeName,
+                  arguments: lodedProducts[index].id);
+            },
+            child: ProductItem(
+                id: lodedProducts[index].id,
+                title: lodedProducts[index].title,
+                description: lodedProducts[index].description,
+                price: lodedProducts[index].price,
+                imageUrl: lodedProducts[index].imageUrl),
+          );
         },
       ),
     );

@@ -1,5 +1,7 @@
-import '../screens/product_overview.dart';
 import 'package:flutter/material.dart';
+
+import './screens/product_overview.dart';
+import './screens/detail_product.dart';
 
 void main() => runApp(const MyApp());
 
@@ -15,6 +17,7 @@ class MyApp extends StatelessWidget {
               .copyWith(secondary: Colors.yellow)),
       routes: {
         '/': (context) => ProductOverview(),
+        ProductDetail.routeName: (context) => const ProductDetail()
       },
     );
   }
