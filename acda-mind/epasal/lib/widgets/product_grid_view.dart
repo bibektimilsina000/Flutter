@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../models/products.dart';
+import '/providers/products.dart';
+import '../widgets/product_item.dart';
 
 class ProductGridView extends StatelessWidget {
-  final List<Product> lodedProducts;
-
   @override
   Widget build(BuildContext context) {
+    final productData = Provider.of<Products>(context);
+    final product = productData.items;
     return GridView.builder(
       padding: const EdgeInsets.all(10),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -15,19 +17,14 @@ class ProductGridView extends StatelessWidget {
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
       ),
-      itemCount: lodedProducts.length,
+      itemCount: product.length,
       itemBuilder: (BuildContext context, int index) {
-        return GestureDetector(
-          onTap: () {
-            Navigator.of(context).pushNamed(ProductDetail.routeName,
-                arguments: lodedProducts[index].id);
-          },
-          child: ProductItem(
-              id: lodedProducts[index].id,
-              title: lodedProducts[index].title,
-              description: lodedProducts[index].description,
-              price: lodedProducts[index].price,
-              imageUrl: lodedProducts[index].imageUrl),
+        return ProductItem(
+          id: product[index].id,
+          title: product[index].title,
+          description: product[index].description,
+          price: product[index].price,
+          imageUrl: product[index].imageUrl,
         );
       },
     );

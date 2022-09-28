@@ -1,4 +1,6 @@
+import 'package:epasal/providers/products.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import './screens/product_overview.dart';
 import './screens/detail_product.dart';
@@ -10,15 +12,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Material App',
-      theme: ThemeData(
-          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green)
-              .copyWith(secondary: Colors.yellow)),
-      routes: {
-        '/': (context) => ProductOverview(),
-        ProductDetail.routeName: (context) => const ProductDetail()
-      },
+    return ChangeNotifierProvider(
+      create: (context) => Products(),
+      child: MaterialApp(
+        title: 'ePasal',
+        theme: ThemeData(
+            colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green)
+                .copyWith(secondary: Colors.yellow)),
+        routes: {
+          '/': (context) => ProductOverview(),
+          ProductDetail.routeName: (context) => const ProductDetail()
+        },
+      ),
     );
   }
 }
