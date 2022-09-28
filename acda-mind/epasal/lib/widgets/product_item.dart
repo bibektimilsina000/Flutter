@@ -8,6 +8,7 @@ class ProductItem extends StatelessWidget {
   final double price;
   final String imageUrl;
   const ProductItem({
+    super.key,
     required this.id,
     required this.title,
     required this.description,

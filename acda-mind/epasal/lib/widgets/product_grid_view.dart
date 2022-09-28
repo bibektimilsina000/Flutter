@@ -5,6 +5,8 @@ import '/providers/products.dart';
 import '../widgets/product_item.dart';
 
 class ProductGridView extends StatelessWidget {
+  const ProductGridView({super.key});
+
   @override
   Widget build(BuildContext context) {
     final productData = Provider.of<Products>(context);
