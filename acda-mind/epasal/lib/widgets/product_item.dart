@@ -1,35 +1,32 @@
+import 'package:epasal/providers/product.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../screens/detail_product.dart';
 
 class ProductItem extends StatelessWidget {
-  final String id;
-  final String title;
-  final String description;
-  final double price;
-  final String imageUrl;
   const ProductItem({
     super.key,
-    required this.id,
-    required this.title,
-    required this.description,
-    required this.price,
-    required this.imageUrl,
   });
 
   @override
   Widget build(BuildContext context) {
+    final product = Provider.of<Product>(context);
+
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed(ProductDetail.routeName, arguments: id);
+        Navigator.of(context)
+            .pushNamed(ProductDetail.routeName, arguments: product.id);
       },
       child: GridTile(
         footer: GridTileBar(
-          title: Text(title),
+          title: Text(product.title),
           backgroundColor: Colors.black54,
           leading: IconButton(
-              onPressed: (() {}),
+              onPressed: (() {
+                product.toggleFavoriteStatus();
+              }),
               icon: Icon(
-                Icons.favorite,
+                product.isFav ? Icons.favorite : Icons.favorite_border,
                 color: Theme.of(context).colorScheme.secondary,
               )),
           trailing: IconButton(
@@ -41,7 +38,7 @@ class ProductItem extends StatelessWidget {
           ),
         ),
         child: Image.network(
-          imageUrl,
+          product.imageUrl,
           fit: BoxFit.cover,
         ),
       ),
