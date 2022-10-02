@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/product_grid_view.dart';
+import '../providers/products.dart';
 
 enum FilterOptions {
   favorites,
@@ -14,13 +16,18 @@ class ProductOverview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var productData = Provider.of<Products>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: const Text('ePasal'),
         actions: [
           PopupMenuButton(
-            onSelected: (value) {
-              print(value);
+            onSelected: (FilterOptions value) {
+              if (value == FilterOptions.favorites) {
+                productData.showFavoriteItem();
+              } else {
+                productData.showAllItem();
+              }
             },
             icon: const Icon(Icons.more_vert),
             itemBuilder: (context) => [
