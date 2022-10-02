@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green)
                 .copyWith(secondary: Colors.yellow)),
         routes: {
-          '/': (context) => ProductOverview(),
+          '/': (context) => const ProductOverview(),
           ProductDetail.routeName: (context) => const ProductDetail()
         },
       ),
