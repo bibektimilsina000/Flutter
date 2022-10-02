@@ -19,13 +19,17 @@ class ProductOverview extends StatelessWidget {
         title: const Text('ePasal'),
         actions: [
           PopupMenuButton(
+            onSelected: (value) {
+              print(value);
+            },
+            icon: const Icon(Icons.more_vert),
             itemBuilder: (context) => [
               const PopupMenuItem(
-                value: 0,
+                value: FilterOptions.favorites,
                 child: Text('Only Favorite'),
               ),
               const PopupMenuItem(
-                value: 1,
+                value: FilterOptions.all,
                 child: Text('Show All'),
               )
             ],
