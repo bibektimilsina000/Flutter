@@ -21,8 +21,8 @@ class ProductGridView extends StatelessWidget {
       ),
       itemCount: product.length,
       itemBuilder: (BuildContext context, int index) {
-        return ChangeNotifierProvider(
-          create: (context) => product[index],
+        return ChangeNotifierProvider.value(
+          value: product[index],
           child: const ProductItem(),
         );
       },
