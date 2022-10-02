@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../widgets/product_grid_view.dart';
-import '../providers/products.dart';
 
 enum FilterOptions {
   favorites,
   all,
 }
 
-void main() => runApp(const ProductOverview());
+void main() => runApp(ProductOverview());
 
-class ProductOverview extends StatelessWidget {
-  const ProductOverview({super.key});
+class ProductOverview extends StatefulWidget {
+  @override
+  State<ProductOverview> createState() => _ProductOverviewState();
+}
+
+class _ProductOverviewState extends State<ProductOverview> {
+  bool showOnlyFavorite = false;
 
   @override
   Widget build(BuildContext context) {
-    var productData = Provider.of<Products>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: const Text('ePasal'),
@@ -24,9 +26,13 @@ class ProductOverview extends StatelessWidget {
           PopupMenuButton(
             onSelected: (FilterOptions value) {
               if (value == FilterOptions.favorites) {
-                productData.showFavoriteItem();
+                setState(() {
+                  showOnlyFavorite = true;
+                });
               } else {
-                productData.showAllItem();
+                setState(() {
+                  showOnlyFavorite = false;
+                });
               }
             },
             icon: const Icon(Icons.more_vert),
@@ -43,7 +49,7 @@ class ProductOverview extends StatelessWidget {
           )
         ],
       ),
-      body: const ProductGridView(),
+      body: ProductGridView(showOnlyFavorite),
     );
   }
 }
