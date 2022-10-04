@@ -1,4 +1,5 @@
-import 'package:epasal/providers/products.dart';
+import '/providers/cart.dart';
+import '/providers/products.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,9 +13,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => Products(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => Products()),
+        ChangeNotifierProvider(create: (context) => Cart())
+      ],
       child: MaterialApp(
+        debugShowMaterialGrid: false,
+        debugShowCheckedModeBanner: false,
         title: 'ePasal',
         theme: ThemeData(
             colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green)
