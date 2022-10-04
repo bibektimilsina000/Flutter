@@ -25,15 +25,13 @@ class _ProductOverviewState extends State<ProductOverview> {
         actions: [
           PopupMenuButton(
             onSelected: (FilterOptions value) {
-              if (value == FilterOptions.favorites) {
-                setState(() {
+              setState(() {
+                if (value == FilterOptions.favorites) {
                   showOnlyFavorite = true;
-                });
-              } else {
-                setState(() {
+                } else {
                   showOnlyFavorite = false;
-                });
-              }
+                }
+              });
             },
             icon: const Icon(Icons.more_vert),
             itemBuilder: (context) => [
