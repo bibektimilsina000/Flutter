@@ -11,9 +11,11 @@ enum FilterOptions {
   all,
 }
 
-void main() => runApp(ProductOverview());
+void main() => runApp(const ProductOverview());
 
 class ProductOverview extends StatefulWidget {
+  const ProductOverview({super.key});
+
   @override
   State<ProductOverview> createState() => _ProductOverviewState();
 }
