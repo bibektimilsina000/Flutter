@@ -1,8 +1,5 @@
-import 'package:epasal/providers/cart.dart';
-import 'package:epasal/screens/cart_screen.dart';
-import 'package:epasal/widgets/badge.dart';
+import 'package:epasal/widgets/cart_icon_and_badge.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../widgets/product_grid_view.dart';
 
@@ -51,15 +48,7 @@ class _ProductOverviewState extends State<ProductOverview> {
               )
             ],
           ),
-          Consumer<Cart>(
-            builder: (_, cart, ch) => Badge(
-                value: cart.itemCount.toString(),
-                child: IconButton(
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(CartScreen.routeName);
-                    },
-                    icon: const Icon(Icons.shopping_cart))),
-          )
+          const CartIconAndBadge()
         ],
       ),
       body: ProductGridView(showOnlyFavorite),

@@ -1,3 +1,4 @@
+import 'package:epasal/providers/order.dart';
 import 'package:epasal/screens/cart_screen.dart';
 
 import '/providers/cart.dart';
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => Products()),
-        ChangeNotifierProvider(create: (context) => Cart())
+        ChangeNotifierProvider(create: (context) => Cart()),
+        ChangeNotifierProvider(create: (context) => Orders()),
       ],
       child: MaterialApp(
         debugShowMaterialGrid: false,

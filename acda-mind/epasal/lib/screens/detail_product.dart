@@ -1,3 +1,6 @@
+import 'package:epasal/providers/cart.dart';
+import 'package:epasal/widgets/cart_icon_and_badge.dart';
+
 import '/providers/products.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,9 +19,58 @@ class ProductDetail extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(lodedProduct.title),
+        actions: const [CartIconAndBadge()],
       ),
-      body: const Center(
-        child: Text('Hello World'),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                child: Image.network(
+                  lodedProduct.imageUrl,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(lodedProduct.title),
+                      Text('Rs: ${lodedProduct.price}')
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(lodedProduct.description),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      ElevatedButton(
+                          onPressed: () {
+                            Provider.of<Cart>(context, listen: false).addItem(
+                                productId,
+                                lodedProduct.title,
+                                lodedProduct.price);
+                          },
+                          child: const Text('Add to cart')),
+                      OutlinedButton(
+                          onPressed: () {}, child: const Text('Buy Now'))
+                    ],
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
