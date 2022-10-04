@@ -1,4 +1,5 @@
 import 'package:epasal/providers/cart.dart';
+import 'package:epasal/screens/cart_screen.dart';
 import 'package:epasal/widgets/badge.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -52,7 +53,10 @@ class _ProductOverviewState extends State<ProductOverview> {
             builder: (_, cart, ch) => Badge(
                 value: cart.itemCount.toString(),
                 child: IconButton(
-                    onPressed: () {}, icon: const Icon(Icons.shopping_cart))),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(CartScreen.routeName);
+                    },
+                    icon: const Icon(Icons.shopping_cart))),
           )
         ],
       ),

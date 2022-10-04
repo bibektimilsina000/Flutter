@@ -1,3 +1,5 @@
+import 'package:epasal/screens/cart_screen.dart';
+
 import '/providers/cart.dart';
 import '/providers/products.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +29,8 @@ class MyApp extends StatelessWidget {
                 .copyWith(secondary: Colors.yellow)),
         routes: {
           '/': (context) => ProductOverview(),
-          ProductDetail.routeName: (context) => const ProductDetail()
+          ProductDetail.routeName: (context) => const ProductDetail(),
+          CartScreen.routeName: (context) => const CartScreen()
         },
       ),
     );
