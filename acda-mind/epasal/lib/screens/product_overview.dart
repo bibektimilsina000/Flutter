@@ -1,4 +1,5 @@
 import 'package:epasal/widgets/cart_icon_and_badge.dart';
+import 'package:epasal/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/product_grid_view.dart';
@@ -51,7 +52,7 @@ class _ProductOverviewState extends State<ProductOverview> {
           const CartIconAndBadge()
         ],
       ),
-      drawer: ,
+      drawer: const DrawerScreen(),
       body: ProductGridView(showOnlyFavorite),
     );
   }
