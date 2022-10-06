@@ -51,6 +51,7 @@ class _ProductOverviewState extends State<ProductOverview> {
           const CartIconAndBadge()
         ],
       ),
+      drawer: ,
       body: ProductGridView(showOnlyFavorite),
     );
   }
