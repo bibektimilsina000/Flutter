@@ -1,5 +1,6 @@
 import 'package:epasal/providers/order.dart';
 import 'package:epasal/screens/cart_screen.dart';
+import 'package:epasal/screens/user_product.dart';
 
 import '/providers/cart.dart';
 import '/providers/products.dart';
@@ -34,7 +35,8 @@ class MyApp extends StatelessWidget {
           '/': (context) => const ProductOverview(),
           ProductDetail.routeName: (context) => const ProductDetail(),
           CartScreen.routeName: (context) => const CartScreen(),
-          OrderScreen.routeName: (context) => const OrderScreen()
+          OrderScreen.routeName: (context) => const OrderScreen(),
+          UserProductScreen.routeName: (context) => const UserProductScreen(),
         },
       ),
     );
