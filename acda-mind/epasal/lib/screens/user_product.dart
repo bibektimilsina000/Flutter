@@ -1,4 +1,5 @@
 import 'package:epasal/providers/products.dart';
+import 'package:epasal/screens/edit_product_screen.dart';
 import 'package:epasal/widgets/drawer.dart';
 import 'package:epasal/widgets/user_product_item.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,13 @@ class UserProductScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Your Products'),
-        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.add))],
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(EditProductScreen.routeName);
+              },
+              icon: const Icon(Icons.add))
+        ],
       ),
       drawer: const DrawerScreen(),
       body: ListView.builder(
