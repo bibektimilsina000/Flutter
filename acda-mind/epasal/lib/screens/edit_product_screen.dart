@@ -28,6 +28,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
     }
   }
 
+  @override
+  void dispose() {
+    imageUrlFocus.removeListener(updateImage);
+    imageUrlcontroller.dispose();
+    imageUrlFocus.dispose();
+    super.dispose();
+  }
+
   void saveForm() {
     form.currentState;
     print(editedProduct.title);
