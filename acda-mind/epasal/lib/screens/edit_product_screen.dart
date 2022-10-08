@@ -16,7 +16,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
   var editedProduct =
       Product(id: '', title: '', description: '', price: 0.0, imageUrl: '');
 
- 
+  @override
+  void initState() {
+    imageUrlFocus.addListener(updateImage);
+    super.initState();
   }
 
   void updateImage() {
