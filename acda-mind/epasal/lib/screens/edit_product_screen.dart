@@ -36,6 +36,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
     super.dispose();
   }
 
+  void saveForm() {
+    form.currentState;
+    print(editedProduct.title);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
