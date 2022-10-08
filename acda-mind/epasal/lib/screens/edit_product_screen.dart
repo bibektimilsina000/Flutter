@@ -118,15 +118,6 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               imageUrlcontroller.text,
                               fit: BoxFit.cover,
                             )),
-                  Expanded(
-                    child: TextFormField(
-                      decoration:
-                          const InputDecoration(label: Text('Image Url')),
-                      textInputAction: TextInputAction.done,
-                      controller: imageUrlcontroller,
-                      focusNode: imageUrlFocus,
-                    ),
-                  ),
                 ],
               ),
             ],
