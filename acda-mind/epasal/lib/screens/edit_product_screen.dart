@@ -1,5 +1,7 @@
 import 'package:epasal/providers/product.dart';
+import 'package:epasal/providers/products.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class EditProductScreen extends StatefulWidget {
   static const routeName = '/edit-product';
@@ -20,16 +22,46 @@ class _EditProductScreenState extends State<EditProductScreen> {
       price: 0.0,
       imageUrl: '');
 
+  var initValue = {
+    'title': '',
+    'description': '',
+    'price': '',
+    'imageUrl': '',
+  };
+
+  bool isInit = false;
+
   @override
   void initState() {
     imageUrlFocus.addListener(updateImage);
     super.initState();
   }
 
+  @override
+  void didChangeDependencies() {
+    if (!isInit) {
+      final id = ModalRoute.of(context)!.settings.arguments as String;
+      editedProduct = Provider.of<Products>(context).getById(id);
+      initValue = {
+        'title': editedProduct.title,
+        'description': editedProduct.description,
+        'price': editedProduct.price.toString(),
+        'imageUrl': '',
+      };
+      imageUrlcontroller.text = editedProduct.imageUrl;
+    }
+
+    isInit = true;
+    super.didChangeDependencies();
+  }
+
   void updateImage() {
     if (!imageUrlFocus.hasFocus) {
-      if ((!imageUrlcontroller.text.startsWith('http://')) &&
-          (imageUrlcontroller.text.startsWith('https://'))) {
+      if (imageUrlcontroller.text.isEmpty) {
+        setState(() {});
+      }
+      if ((!imageUrlcontroller.text.startsWith('http') &&
+          !imageUrlcontroller.text.startsWith('https'))) {
         return;
       }
       setState(() {});
@@ -51,7 +83,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
       return;
     }
     _form.currentState!.save();
-    print(editedProduct.title);
+
+    Provider.of<Products>(context, listen: false).addProduct(editedProduct);
+    Navigator.of(context).pop();
   }
 
   @override
@@ -70,6 +104,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
               TextFormField(
                 decoration: const InputDecoration(label: Text('Title')),
                 textInputAction: TextInputAction.next,
+                initialValue: initValue['title'],
                 onFieldSubmitted: (value) {},
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -90,6 +125,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 decoration: const InputDecoration(label: Text('Price')),
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
+                initialValue: initValue['price'],
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Enter price';
@@ -109,6 +145,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 decoration: const InputDecoration(label: Text('Description')),
                 maxLines: 3,
                 keyboardType: TextInputType.multiline,
+                initialValue: initValue['description'],
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Enter Description';
@@ -119,9 +156,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   editedProduct = Product(
                       id: editedProduct.id,
                       title: editedProduct.title,
-                      description: editedProduct.description,
+                      description: newValue.toString(),
                       price: editedProduct.price,
-                      imageUrl: newValue.toString());
+                      imageUrl: editedProduct.imageUrl);
                 },
               ),
               Row(
@@ -161,6 +198,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         }
 
                         return null;
+                      },
+                      onSaved: (newValue) {
+                        editedProduct = Product(
+                            id: editedProduct.id,
+                            title: editedProduct.title,
+                            description: editedProduct.description,
+                            price: editedProduct.price,
+                            imageUrl: newValue.toString());
                       },
                       keyboardType: TextInputType.url,
                       decoration:
