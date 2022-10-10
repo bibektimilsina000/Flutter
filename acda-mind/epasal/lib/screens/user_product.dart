@@ -16,7 +16,8 @@ class UserProductScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.primary,
         onPressed: () {
-          Navigator.of(context).pushNamed(EditProductScreen.routeName);
+          Navigator.of(context)
+              .pushNamed(EditProductScreen.routeName, arguments: 'add');
         },
         child: Icon(Icons.add),
       ),
