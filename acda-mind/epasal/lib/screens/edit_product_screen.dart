@@ -41,14 +41,16 @@ class _EditProductScreenState extends State<EditProductScreen> {
   void didChangeDependencies() {
     if (!isInit) {
       final id = ModalRoute.of(context)!.settings.arguments as String;
-      editedProduct = Provider.of<Products>(context).getById(id);
-      initValue = {
-        'title': editedProduct.title,
-        'description': editedProduct.description,
-        'price': editedProduct.price.toString(),
-        'imageUrl': '',
-      };
-      imageUrlcontroller.text = editedProduct.imageUrl;
+      if (id != 'add') {
+        editedProduct = Provider.of<Products>(context).getById(id);
+        initValue = {
+          'title': editedProduct.title,
+          'description': editedProduct.description,
+          'price': editedProduct.price.toString(),
+          'imageUrl': '',
+        };
+        imageUrlcontroller.text = editedProduct.imageUrl;
+      }
     }
 
     isInit = true;

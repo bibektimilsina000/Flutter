@@ -13,12 +13,20 @@ class UserProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final productsData = Provider.of<Products>(context);
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        onPressed: () {
+          Navigator.of(context).pushNamed(EditProductScreen.routeName);
+        },
+        child: Icon(Icons.add),
+      ),
       appBar: AppBar(
         title: const Text('Your Products'),
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.of(context).pushNamed(EditProductScreen.routeName);
+                Navigator.of(context)
+                    .pushNamed(EditProductScreen.routeName, arguments: 'add');
               },
               icon: const Icon(Icons.add))
         ],
