@@ -12,7 +12,7 @@ class EditProductScreen extends StatefulWidget {
 class _EditProductScreenState extends State<EditProductScreen> {
   final imageUrlcontroller = TextEditingController();
   final imageUrlFocus = FocusNode();
-  final form = GlobalKey();
+  GlobalKey<FormState> _form = GlobalKey();
   var editedProduct =
       Product(id: '', title: '', description: '', price: 0.0, imageUrl: '');
 
@@ -37,7 +37,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
   }
 
   void saveForm() {
-    form.currentState;
+    final isValid = _form.currentState!.validate();
+
+    if (!isValid) {
+      return;
+    }
+    _form.currentState!.save();
     print(editedProduct.title);
   }
 
@@ -51,13 +56,19 @@ class _EditProductScreenState extends State<EditProductScreen> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
-          key: form,
+          key: _form,
           child: ListView(
             children: [
               TextFormField(
                 decoration: const InputDecoration(label: Text('Title')),
                 textInputAction: TextInputAction.next,
                 onFieldSubmitted: (value) {},
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Enter Title";
+                  }
+                  return null;
+                },
                 onSaved: (newValue) {
                   editedProduct = Product(
                       id: editedProduct.id,
@@ -71,6 +82,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 decoration: const InputDecoration(label: Text('Price')),
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Enter price';
+                  }
+                  return null;
+                },
                 onSaved: (newValue) {
                   editedProduct = Product(
                       id: editedProduct.id,
@@ -84,6 +101,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 decoration: const InputDecoration(label: Text('Description')),
                 maxLines: 3,
                 keyboardType: TextInputType.multiline,
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Enter Description';
+                  }
+                  return null;
+                },
                 onSaved: (newValue) {
                   editedProduct = Product(
                       id: editedProduct.id,
@@ -120,6 +143,17 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             )),
                   Expanded(
                     child: TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Enter imageUrl';
+                        }
+                        if (!value.startsWith('http://') ||
+                            !value.startsWith('https://')) {
+                          return 'Enter Valid Url';
+                        }
+
+                        return null;
+                      },
                       decoration:
                           const InputDecoration(label: Text('Image Url')),
                       textInputAction: TextInputAction.done,
