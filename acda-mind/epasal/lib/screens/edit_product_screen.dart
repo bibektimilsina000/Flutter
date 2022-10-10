@@ -13,8 +13,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
   final imageUrlcontroller = TextEditingController();
   final imageUrlFocus = FocusNode();
   GlobalKey<FormState> _form = GlobalKey();
-  var editedProduct =
-      Product(id: '', title: '', description: '', price: 0.0, imageUrl: '');
+  var editedProduct = Product(
+      id: DateTime.now().toString(),
+      title: '',
+      description: '',
+      price: 0.0,
+      imageUrl: '');
 
   @override
   void initState() {
@@ -24,6 +28,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
   void updateImage() {
     if (!imageUrlFocus.hasFocus) {
+      if ((!imageUrlcontroller.text.startsWith('http://')) &&
+          (imageUrlcontroller.text.startsWith('https://'))) {
+        return;
+      }
       setState(() {});
     }
   }
@@ -147,13 +155,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         if (value!.isEmpty) {
                           return 'Enter imageUrl';
                         }
-                        if (!imageUrlcontroller.text.startsWith('http://') ||
-                            !imageUrlcontroller.text.startsWith('https://')) {
+                        if (!value.startsWith('http://') &&
+                            !value.startsWith('https://')) {
                           return 'Enter Valid Url';
                         }
 
                         return null;
                       },
+                      keyboardType: TextInputType.url,
                       decoration:
                           const InputDecoration(label: Text('Image Url')),
                       textInputAction: TextInputAction.done,
