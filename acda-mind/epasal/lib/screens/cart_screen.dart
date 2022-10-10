@@ -1,5 +1,6 @@
 import 'package:epasal/providers/cart.dart' show Cart;
 import 'package:epasal/providers/order.dart';
+import 'package:epasal/screens/order_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../widgets/cart_item.dart';
@@ -46,6 +47,8 @@ class CartScreen extends StatelessWidget {
                         Provider.of<Orders>(context, listen: false).addOrder(
                             cart.totalAmount, cart.item.values.toList());
                         cart.clearCart();
+                        Navigator.of(context)
+                            .pushReplacementNamed(OrderScreen.routeName);
                       },
                       child: const Text('ORDER NOW'),
                     )

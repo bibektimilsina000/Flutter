@@ -23,7 +23,7 @@ class OrderScreen extends StatelessWidget {
       body: ListView.builder(
         itemCount: orderData.orders.length,
         itemBuilder: (BuildContext context, int index) {
-          return OrderItem(orderData.orders[index]);
+          return OrderItem(orderData.orders[index].id, orderData.orders[index]);
         },
       ),
     );
