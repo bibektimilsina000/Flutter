@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:epasal/providers/cart.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class OrderItem {
   final String id;
@@ -16,23 +19,81 @@ class OrderItem {
 }
 
 class Orders with ChangeNotifier {
-  final List<OrderItem> _orders = [];
+  List<OrderItem> _orders = [];
 
   List<OrderItem> get orders {
     return [..._orders];
   }
 
-  void addOrder(double total, List<CartItem> cartProducts) {
-    _orders.insert(
-      0,
-      OrderItem(
-        id: DateTime.now().toString(),
-        amount: total,
-        products: cartProducts,
-        dateTime: DateTime.now(),
-      ),
-    );
-    notifyListeners();
+  Future<void> fetchOrder() async {
+    final url = 'https://epasal-edd08-default-rtdb.firebaseio.com/orders.json';
+
+    try {
+      final response = await http.get(Uri.parse(url));
+      final fetchedData = json.decode(response.body) as Map<String, dynamic>;
+
+      if (fetchedData == null) {
+        return;
+      }
+
+      final List<OrderItem> lodedData = [];
+
+      fetchedData.forEach((orderId, orderData) {
+        lodedData.add(
+          OrderItem(
+            id: orderId,
+            amount: orderData['amount'],
+            products: (orderData['products'] as List<dynamic>)
+                .map((item) => CartItem(
+                    id: item['id'],
+                    title: item['title'],
+                    quantity: item['quantity'],
+                    price: item['price']))
+                .toList(),
+            dateTime: DateTime.parse(
+              orderData['dateTime'],
+            ),
+          ),
+        );
+      });
+
+      _orders = lodedData.reversed.toList();
+      notifyListeners();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  Future<void> addOrder(double total, List<CartItem> cartProducts) async {
+    final url = 'https://epasal-edd08-default-rtdb.firebaseio.com/orders.json';
+    final timeStamp = DateTime.now();
+    try {
+      final response = await http.post(Uri.parse(url),
+          body: json.encode({
+            'amount': total,
+            'dateTime': timeStamp.toIso8601String(),
+            'products': cartProducts
+                .map((cartProduct) => {
+                      'id': cartProduct.id,
+                      'title': cartProduct.title,
+                      'quantity': cartProduct.quantity,
+                      'price': cartProduct.price,
+                    })
+                .toList()
+          }));
+      _orders.insert(
+        0,
+        OrderItem(
+          id: json.decode(response.body)['name'],
+          amount: total,
+          products: cartProducts,
+          dateTime: timeStamp,
+        ),
+      );
+      notifyListeners();
+    } catch (error) {
+      throw error;
+    }
   }
 
   void deleteOrder(String id) {
