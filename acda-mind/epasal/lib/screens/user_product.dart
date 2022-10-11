@@ -9,9 +9,14 @@ class UserProductScreen extends StatelessWidget {
   static const routeName = 'user-product';
   const UserProductScreen({super.key});
 
+  Future<void> _refreshProduct(BuildContext context) async {
+    await Provider.of<Products>(context, listen: false).fetchProduct();
+  }
+
   @override
   Widget build(BuildContext context) {
     final productsData = Provider.of<Products>(context);
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -33,14 +38,20 @@ class UserProductScreen extends StatelessWidget {
         ],
       ),
       drawer: const DrawerScreen(),
-      body: ListView.builder(
-        itemCount: productsData.items.length,
-        itemBuilder: (BuildContext context, int index) {
-          return UserProductItem(
-              productsData.items[index].id,
-              productsData.items[index].title,
-              productsData.items[index].imageUrl);
-        },
+      body: RefreshIndicator(
+        onRefresh: () => _refreshProduct(context),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListView.builder(
+            itemCount: productsData.items.length,
+            itemBuilder: (BuildContext context, int index) {
+              return UserProductItem(
+                  productsData.items[index].id,
+                  productsData.items[index].title,
+                  productsData.items[index].imageUrl);
+            },
+          ),
+        ),
       ),
     );
   }

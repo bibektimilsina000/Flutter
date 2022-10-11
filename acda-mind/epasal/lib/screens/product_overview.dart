@@ -1,6 +1,8 @@
+import 'package:epasal/providers/products.dart';
 import 'package:epasal/widgets/cart_icon_and_badge.dart';
 import 'package:epasal/widgets/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/product_grid_view.dart';
 
@@ -20,6 +22,37 @@ class ProductOverview extends StatefulWidget {
 
 class _ProductOverviewState extends State<ProductOverview> {
   bool showOnlyFavorite = false;
+  bool isLoading = false;
+  @override
+  void initState() {
+    setState(() {
+      isLoading = true;
+    });
+
+    Provider.of<Products>(context, listen: false).fetchProduct().then((value) {
+      setState(() {
+        isLoading = false;
+      });
+    }).catchError((error) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('An error occur!'),
+          content: Text('try checking your internet connection.'),
+          actions: [
+            TextButton(onPressed: () {}, child: Text('Quite')),
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Retry')),
+          ],
+        ),
+      );
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +86,11 @@ class _ProductOverviewState extends State<ProductOverview> {
         ],
       ),
       drawer: const DrawerScreen(),
-      body: ProductGridView(showOnlyFavorite),
+      body: isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : ProductGridView(showOnlyFavorite),
     );
   }
 }

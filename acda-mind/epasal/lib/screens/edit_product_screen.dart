@@ -1,5 +1,6 @@
 import 'package:epasal/providers/product.dart';
 import 'package:epasal/providers/products.dart';
+import 'package:epasal/widgets/error_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -81,47 +82,39 @@ class _EditProductScreenState extends State<EditProductScreen> {
     super.dispose();
   }
 
-  void saveForm() {
+  void saveForm() async {
     final isValid = _form.currentState!.validate();
 
     if (!isValid) {
       return;
     }
     _form.currentState!.save();
+
     setState(() {
       isLoading = true;
     });
 
     if (editedProduct.id != 'null') {
-      Provider.of<Products>(context, listen: false)
-          .updateProduct(editedProduct.id, editedProduct);
-      setState(() {
-        isLoading = false;
-      });
-
-      Navigator.of(context).pop();
+      try {
+        await Provider.of<Products>(context, listen: false)
+            .updateProduct(editedProduct.id, editedProduct);
+      } catch (error) {
+        await errorDialog(context);
+      }
     } else {
-      Provider.of<Products>(context, listen: false)
-          .addProduct(editedProduct)
-          .catchError((error) {
-        return showDialog<Null>(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text('An error occurs!'),
-            content: Text("Opps! Something went wrong."),
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('close'))
-            ],
-          ),
-        );
-      }).then((value) {
-        Navigator.of(context).pop();
-      });
+      try {
+        await Provider.of<Products>(context, listen: false)
+            .addProduct(editedProduct);
+      } catch (error) {
+        await errorDialog(context);
+      }
     }
+
+    setState(() {
+      isLoading = false;
+    });
+
+    Navigator.of(context).pop();
   }
 
   @override
