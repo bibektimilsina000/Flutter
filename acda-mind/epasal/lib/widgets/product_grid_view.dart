@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '/providers/products.dart';
 import '../widgets/product_item.dart';
 
+// ignore: must_be_immutable
 class ProductGridView extends StatelessWidget {
   bool showOnlyFavorite;
 
