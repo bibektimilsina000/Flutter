@@ -16,12 +16,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
   final imageUrlFocus = FocusNode();
   GlobalKey<FormState> _form = GlobalKey();
   var editedProduct = Product(
-    id: 'null',
-    title: '',
-    description: '',
-    price: 0.0,
-    imageUrl: '',
-  );
+      id: 'null',
+      title: '',
+      description: '',
+      price: 0.0,
+      imageUrl: '',
+      isFav: false);
 
   var initValue = {
     'title': '',
@@ -83,23 +83,30 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
   void saveForm() {
     final isValid = _form.currentState!.validate();
-    setState(() {
-      isLoading = true;
-    });
 
     if (!isValid) {
       return;
     }
     _form.currentState!.save();
+    setState(() {
+      isLoading = true;
+    });
 
-    Provider.of<Products>(context, listen: false)
-        .addProduct(editedProduct)
-        .then((value) {
+    if (editedProduct.id != 'null') {
+      Provider.of<Products>(context, listen: false)
+          .updateProduct(editedProduct.id, editedProduct);
       setState(() {
         isLoading = false;
       });
+
       Navigator.of(context).pop();
-    });
+    } else {
+      Provider.of<Products>(context, listen: false)
+          .addProduct(editedProduct)
+          .then((value) {
+        Navigator.of(context).pop();
+      });
+    }
   }
 
   @override
@@ -132,11 +139,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       },
                       onSaved: (newValue) {
                         editedProduct = Product(
-                            id: editedProduct.id,
-                            title: newValue.toString(),
-                            description: editedProduct.description,
-                            price: editedProduct.price,
-                            imageUrl: editedProduct.imageUrl);
+                          id: editedProduct.id,
+                          title: newValue.toString(),
+                          description: editedProduct.description,
+                          price: editedProduct.price,
+                          imageUrl: editedProduct.imageUrl,
+                          isFav: editedProduct.isFav,
+                        );
                       },
                     ),
                     TextFormField(
@@ -152,11 +161,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       },
                       onSaved: (newValue) {
                         editedProduct = Product(
-                            id: editedProduct.id,
-                            title: editedProduct.title,
-                            description: editedProduct.description,
-                            price: double.parse(newValue!),
-                            imageUrl: editedProduct.imageUrl);
+                          id: editedProduct.id,
+                          title: editedProduct.title,
+                          description: editedProduct.description,
+                          price: double.parse(newValue!),
+                          imageUrl: editedProduct.imageUrl,
+                          isFav: editedProduct.isFav,
+                        );
                       },
                     ),
                     TextFormField(
@@ -173,11 +184,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       },
                       onSaved: (newValue) {
                         editedProduct = Product(
-                            id: editedProduct.id,
-                            title: editedProduct.title,
-                            description: newValue.toString(),
-                            price: editedProduct.price,
-                            imageUrl: editedProduct.imageUrl);
+                          id: editedProduct.id,
+                          title: editedProduct.title,
+                          description: newValue.toString(),
+                          price: editedProduct.price,
+                          imageUrl: editedProduct.imageUrl,
+                          isFav: editedProduct.isFav,
+                        );
                       },
                     ),
                     Row(
@@ -222,11 +235,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             },
                             onSaved: (newValue) {
                               editedProduct = Product(
-                                  id: editedProduct.id,
-                                  title: editedProduct.title,
-                                  description: editedProduct.description,
-                                  price: editedProduct.price,
-                                  imageUrl: newValue.toString());
+                                id: editedProduct.id,
+                                title: editedProduct.title,
+                                description: editedProduct.description,
+                                price: editedProduct.price,
+                                imageUrl: newValue.toString(),
+                                isFav: editedProduct.isFav,
+                              );
                             },
                             keyboardType: TextInputType.url,
                             decoration:
