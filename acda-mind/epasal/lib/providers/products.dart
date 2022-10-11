@@ -1,3 +1,4 @@
+import 'package:epasal/models/http_exception.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -68,6 +69,7 @@ class Products with ChangeNotifier {
       final response = await http.get(Uri.parse(url));
 
       final exatractedData = json.decode(response.body) as Map<String, dynamic>;
+      print(exatractedData);
       final List<Product> lodedProduct = [];
       exatractedData.forEach(
         (prodId, prodData) {
@@ -76,7 +78,8 @@ class Products with ChangeNotifier {
               title: prodData['title'],
               description: prodData['description'],
               price: prodData['price'],
-              imageUrl: prodData['imageUrl']));
+              imageUrl: prodData['imageUrl'],
+              isFav: prodData['isFav']));
         },
       );
       _items = lodedProduct;
@@ -135,8 +138,16 @@ class Products with ChangeNotifier {
     }
   }
 
-  void deleteProduct(String id) {
-    _items.removeWhere((element) => element.id == id);
-    notifyListeners();
+  Future<void> deleteProduct(String id) async {
+    final url =
+        'https://epasal-edd08-default-rtdb.firebaseio.com/product/${id}.json';
+
+    final response = await http.delete(Uri.parse(url));
+    if (response.statusCode >= 400) {
+      throw HttpException('Sorry,could not delete product');
+    } else {
+      _items.removeWhere((element) => element.id == id);
+      notifyListeners();
+    }
   }
 }

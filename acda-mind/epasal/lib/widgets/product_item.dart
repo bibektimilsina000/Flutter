@@ -24,8 +24,23 @@ class ProductItem extends StatelessWidget {
           title: Text(product.title),
           backgroundColor: Colors.black54,
           leading: IconButton(
-              onPressed: (() {
-                product.toggleFavoriteStatus();
+              onPressed: (() async {
+                try {
+                  await product.toggleFavoriteStatus();
+                } catch (error) {
+                  final snackBar = SnackBar(
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    content: Text(
+                      error.toString(),
+                    ),
+                    action: SnackBarAction(
+                        label: 'Ok',
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                        }),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
               }),
               icon: Icon(
                 product.isFav ? Icons.favorite : Icons.favorite_border,
@@ -37,7 +52,6 @@ class ProductItem extends StatelessWidget {
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
 
               final snackBar = SnackBar(
-                duration: const Duration(milliseconds: 1000),
                 backgroundColor: Theme.of(context).colorScheme.primary,
                 content: const Text('Product Added to Cart'),
                 action: SnackBarAction(
