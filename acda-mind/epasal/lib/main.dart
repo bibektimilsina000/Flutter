@@ -1,3 +1,4 @@
+import 'package:epasal/providers/auth.dart';
 import 'package:epasal/providers/order.dart';
 import 'package:epasal/screens/auth_screen.dart';
 import 'package:epasal/screens/cart_screen.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => Products()),
         ChangeNotifierProvider(create: (context) => Cart()),
         ChangeNotifierProvider(create: (context) => Orders()),
+        ChangeNotifierProvider(create: (context) => Auth())
       ],
       child: MaterialApp(
         debugShowMaterialGrid: false,
