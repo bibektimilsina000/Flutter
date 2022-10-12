@@ -25,4 +25,8 @@ class Auth with ChangeNotifier {
   Future<void> signUp(email, password) async {
     return _authenticate(email, password, 'signUp');
   }
+
+  Future<void> signIn(email, password) async {
+    return _authenticate(email, password, 'signInWithPassword');
+  }
 }
