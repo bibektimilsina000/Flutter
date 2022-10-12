@@ -8,9 +8,10 @@ class Auth with ChangeNotifier {
   late DateTime _experyDate;
   late String _userId;
 
-  Future<void> signUp(email, password) async {
+  Future<void> _authenticate(
+      String email, String password, String urlSection) async {
     final url =
-        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC8yczbfGVTfKrSC1wjwkSnHmzqbHsGkiA';
+        'https://identitytoolkit.googleapis.com/v1/accounts:$urlSection?key=AIzaSyC8yczbfGVTfKrSC1wjwkSnHmzqbHsGkiA';
 
     final response = await http.post(Uri.parse(url),
         body: json.encode({
@@ -18,7 +19,14 @@ class Auth with ChangeNotifier {
           'password': password,
           'returnSecureToken': true,
         }));
-
     print(json.decode(response.body));
+  }
+
+  Future<void> signUp(email, password) async {
+    return _authenticate(email, password, 'signUp');
+  }
+
+  Future<void> signIn(email, password) async {
+    return _authenticate(email, password, 'signInWithPassword');
   }
 }
