@@ -16,6 +16,8 @@ void main() => runApp(const ProductOverview());
 class ProductOverview extends StatefulWidget {
   const ProductOverview({super.key});
 
+  static const routeName = 'product-overview';
+
   @override
   State<ProductOverview> createState() => _ProductOverviewState();
 }

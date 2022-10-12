@@ -1,4 +1,5 @@
 import 'package:epasal/providers/order.dart';
+import 'package:epasal/screens/auth_screen.dart';
 import 'package:epasal/screens/cart_screen.dart';
 import 'package:epasal/screens/edit_product_screen.dart';
 import 'package:epasal/screens/user_product.dart';
@@ -33,7 +34,8 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green)
                 .copyWith(secondary: Colors.yellow)),
         routes: {
-          '/': (context) => const ProductOverview(),
+          '/': (context) => AuthScreen(),
+          ProductOverview.routeName: (context) => const ProductOverview(),
           ProductDetail.routeName: (context) => const ProductDetail(),
           CartScreen.routeName: (context) => CartScreen(),
           OrderScreen.routeName: (context) => const OrderScreen(),
