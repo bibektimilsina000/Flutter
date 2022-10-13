@@ -13,7 +13,6 @@ class OrderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('build');
     return Scaffold(
         drawer: const DrawerScreen(),
         appBar: AppBar(
