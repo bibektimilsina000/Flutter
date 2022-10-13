@@ -20,6 +20,10 @@ class Auth with ChangeNotifier {
     return '';
   }
 
+  String get userId {
+    return _userId;
+  }
+
   Future<void> _authenticate(
       String email, String password, String urlSection) async {
     final url =
@@ -45,6 +49,7 @@ class Auth with ChangeNotifier {
       _userId = responseData['localId'];
       notifyListeners();
     } catch (error) {
+      print(error);
       throw error;
     }
   }
