@@ -1,3 +1,4 @@
+import 'package:epasal/providers/auth.dart';
 import 'package:epasal/providers/cart.dart';
 import 'package:epasal/providers/product.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final product = Provider.of<Product>(context);
     final cart = Provider.of<Cart>(context);
+    final authData = Provider.of<Auth>(context, listen: false);
 
     return GestureDetector(
       onTap: () {
@@ -26,7 +28,8 @@ class ProductItem extends StatelessWidget {
           leading: IconButton(
               onPressed: (() async {
                 try {
-                  await product.toggleFavoriteStatus();
+                  await product.toggleFavoriteStatus(
+                      authData.token, authData.userId);
                 } catch (error) {
                   final snackBar = SnackBar(
                     backgroundColor: Theme.of(context).colorScheme.primary,
