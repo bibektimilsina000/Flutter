@@ -21,19 +21,19 @@ class Product with ChangeNotifier {
     this.isFav = false,
   });
 
-  Future<void> toggleFavoriteStatus() async {
+  Future<void> toggleFavoriteStatus(String authToken, String userId) async {
     final url =
-        'https://epasal-edd08-default-rtdb.firebaseio.com/product/${id}.json';
+        'https://epasal-edd08-default-rtdb.firebaseio.com/userFavorite/$userId/${id}.json?auth=$authToken';
     bool oldStatus = isFav;
 
     try {
       isFav = !isFav;
       notifyListeners();
 
-      final response = await http.patch(
+      final response = await http.put(
         Uri.parse(url),
         body: json.encode(
-          {'isFav': isFav},
+          isFav,
         ),
       );
 
