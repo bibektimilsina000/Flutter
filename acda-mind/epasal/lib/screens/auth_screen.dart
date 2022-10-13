@@ -1,6 +1,8 @@
 import 'dart:math';
 
+import 'package:epasal/models/http_exception.dart';
 import 'package:epasal/providers/auth.dart';
+import 'package:epasal/widgets/error_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -112,13 +114,34 @@ class _AuthCardState extends State<AuthCard> {
     setState(() {
       _isLoading = true;
     });
-    if (_authMode == AuthMode.Login) {
-      await Provider.of<Auth>(context, listen: false)
-          .signIn(_authData['email'], _authData['password']);
-    } else {
-      await Provider.of<Auth>(context, listen: false)
-          .signUp(_authData['email'], _authData['password']);
+    try {
+      if (_authMode == AuthMode.Login) {
+        await Provider.of<Auth>(context, listen: false)
+            .signIn(_authData['email'], _authData['password']);
+      } else {
+        await Provider.of<Auth>(context, listen: false)
+            .signUp(_authData['email'], _authData['password']);
+      }
+    } on HttpException catch (error) {
+      var errorMessage = 'Something went wrong,Plese try again later';
+      if (error.toString().contains('EMAIL_NOT_FOUND')) {
+        errorMessage = 'invaild email.Check your email and try again';
+      } else if (error.toString().contains('INVALID_PASSWORD')) {
+        errorMessage = 'invaild password';
+      } else if (error.toString().contains('USER_DISABLED')) {
+        errorMessage = 'Your account has been disabled by an administrator.';
+      } else if (error.toString().contains('EMAIL_EXISTS')) {
+        errorMessage = 'Email alredy exist.';
+      } else if (error.toString().contains('TOO_MANY_ATTEMPTS_TRY_LATER')) {
+        errorMessage = 'Too many attempts. Try again later.';
+      }
+      await errorDialog(context, error.toString());
+    } catch (error) {
+      print(error.toString());
+      await errorDialog(
+          context, 'Could not authenticate you.Plese try again later');
     }
+
     setState(() {
       _isLoading = false;
     });
