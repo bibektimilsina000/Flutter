@@ -99,14 +99,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
         await Provider.of<Products>(context, listen: false)
             .updateProduct(editedProduct.id, editedProduct);
       } catch (error) {
-        await errorDialog(context);
+        await errorDialog(context, 'Opps! Something went wrong.');
       }
     } else {
       try {
         await Provider.of<Products>(context, listen: false)
             .addProduct(editedProduct);
       } catch (error) {
-        await errorDialog(context);
+        await errorDialog(context, 'Opps! Something went wrong.');
       }
     }
 
