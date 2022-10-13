@@ -36,6 +36,7 @@ class _ProductOverviewState extends State<ProductOverview> {
         isLoading = false;
       });
     }).catchError((error) {
+      print(error);
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
