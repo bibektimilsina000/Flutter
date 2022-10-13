@@ -134,12 +134,14 @@ class _AuthCardState extends State<AuthCard> {
         errorMessage = 'Email alredy exist.';
       } else if (error.toString().contains('TOO_MANY_ATTEMPTS_TRY_LATER')) {
         errorMessage = 'Too many attempts. Try again later.';
+      } else if (error.toString().contains('WEAK_PASSWORD')) {
+        errorMessage = 'Password is too weak.';
       }
-      await errorDialog(context, error.toString());
+      await errorDialog(context, errorMessage.toString());
     } catch (error) {
-      print(error.toString());
-      await errorDialog(
-          context, 'Could not authenticate you.Plese try again later');
+      const errorMessage = 'Could not authenticate you.Plese try again later';
+
+      await errorDialog(context, errorMessage);
     }
 
     setState(() {

@@ -22,29 +22,32 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => Products()),
-        ChangeNotifierProvider(create: (context) => Cart()),
-        ChangeNotifierProvider(create: (context) => Orders()),
-        ChangeNotifierProvider(create: (context) => Auth())
-      ],
-      child: MaterialApp(
-        debugShowMaterialGrid: false,
-        debugShowCheckedModeBanner: false,
-        title: 'ePasal',
-        theme: ThemeData(
-            colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green)
-                .copyWith(secondary: Colors.yellow)),
-        routes: {
-          '/': (context) => AuthScreen(),
-          ProductOverview.routeName: (context) => const ProductOverview(),
-          ProductDetail.routeName: (context) => const ProductDetail(),
-          CartScreen.routeName: (context) => CartScreen(),
-          OrderScreen.routeName: (context) => const OrderScreen(),
-          UserProductScreen.routeName: (context) => const UserProductScreen(),
-          EditProductScreen.routeName: (context) => const EditProductScreen(),
-        },
-      ),
-    );
+        providers: [
+          ChangeNotifierProvider(create: (context) => Products()),
+          ChangeNotifierProvider(create: (context) => Cart()),
+          ChangeNotifierProvider(create: (context) => Orders()),
+          ChangeNotifierProvider(create: (context) => Auth())
+        ],
+        child: Consumer<Auth>(
+          builder: (context, auth, child) => MaterialApp(
+            debugShowMaterialGrid: false,
+            debugShowCheckedModeBanner: false,
+            title: 'ePasal',
+            theme: ThemeData(
+                colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green)
+                    .copyWith(secondary: Colors.yellow)),
+            home: auth.isAuthenticate ? ProductOverview() : AuthScreen(),
+            routes: {
+              ProductOverview.routeName: (context) => const ProductOverview(),
+              ProductDetail.routeName: (context) => const ProductDetail(),
+              CartScreen.routeName: (context) => CartScreen(),
+              OrderScreen.routeName: (context) => const OrderScreen(),
+              UserProductScreen.routeName: (context) =>
+                  const UserProductScreen(),
+              EditProductScreen.routeName: (context) =>
+                  const EditProductScreen(),
+            },
+          ),
+        ));
   }
 }
