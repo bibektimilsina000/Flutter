@@ -80,6 +80,8 @@ class Orders with ChangeNotifier {
         'https://epasal-edd08-default-rtdb.firebaseio.com/orders/$userId.json?auth=$authToken';
     final timeStamp = DateTime.now();
     try {
+      print('working....');
+      print(cartProducts);
       final response = await http.post(Uri.parse(url),
           body: json.encode({
             'amount': total,
@@ -93,6 +95,8 @@ class Orders with ChangeNotifier {
                     })
                 .toList()
           }));
+      print(json.decode(response.body));
+
       _orders.insert(
         0,
         OrderItem(

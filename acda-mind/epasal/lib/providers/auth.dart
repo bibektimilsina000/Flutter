@@ -82,7 +82,6 @@ class Auth with ChangeNotifier {
     final exatractedDate =
         DateTime.parse(getExatractedData['expiryDate'].toString());
 
-    print(exatractedDate.isBefore(DateTime.now()));
     if (exatractedDate.isBefore(DateTime.now())) {
       return false;
     }
@@ -90,17 +89,19 @@ class Auth with ChangeNotifier {
     _token = getExatractedData['token'].toString();
     _userId = getExatractedData['expiryDate'].toString();
     _experyDate = exatractedDate;
-    print('fine till here');
+
     notifyListeners();
 
     return true;
   }
 
-  void signOut() {
+  void signOut() async {
     _token = '';
     _experyDate = DateTime(2000);
     _userId = '';
 
     notifyListeners();
+    final pref = await SharedPreferences.getInstance();
+    pref.clear();
   }
 }
