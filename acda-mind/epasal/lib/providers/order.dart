@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:epasal/models/http_exception.dart';
 import 'package:epasal/providers/cart.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -21,8 +22,9 @@ class OrderItem {
 class Orders with ChangeNotifier {
   List<OrderItem> _orders = [];
   final String authToken;
+  final String userId;
 
-  Orders(this._orders, this.authToken);
+  Orders(this._orders, this.userId, this.authToken);
 
   List<OrderItem> get orders {
     return [..._orders];
@@ -30,10 +32,15 @@ class Orders with ChangeNotifier {
 
   Future<void> fetchOrder() async {
     final url =
-        'https://epasal-edd08-default-rtdb.firebaseio.com/orders.json?auth=$authToken';
+        'https://epasal-edd08-default-rtdb.firebaseio.com/orders/$userId.json?auth=$authToken';
 
     try {
       final response = await http.get(Uri.parse(url));
+
+      if (json.decode(response.body) == null) {
+        throw HttpException('you do not have any orders yet! please add some.');
+      }
+
       final fetchedData = json.decode(response.body) as Map<String, dynamic>;
 
       if (fetchedData == null) {
@@ -70,7 +77,7 @@ class Orders with ChangeNotifier {
 
   Future<void> addOrder(double total, List<CartItem> cartProducts) async {
     final url =
-        'https://epasal-edd08-default-rtdb.firebaseio.com/orders.json?auth=$authToken';
+        'https://epasal-edd08-default-rtdb.firebaseio.com/orders/$userId.json?auth=$authToken';
     final timeStamp = DateTime.now();
     try {
       final response = await http.post(Uri.parse(url),

@@ -75,7 +75,7 @@ class Products with ChangeNotifier {
       final response = await http.get(Uri.parse(url));
 
       final exatractedData = json.decode(response.body) as Map<String, dynamic>;
-      print(exatractedData);
+
       if (exatractedData == null) {
         return;
       }
@@ -105,7 +105,6 @@ class Products with ChangeNotifier {
 
       notifyListeners();
     } catch (error) {
-      print(error);
       throw error;
     }
   }

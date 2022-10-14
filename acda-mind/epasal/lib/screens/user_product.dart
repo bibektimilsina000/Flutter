@@ -15,7 +15,6 @@ class UserProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('building.... ');
     // final productsData = Provider.of<Products>(context);
 
     return Scaffold(

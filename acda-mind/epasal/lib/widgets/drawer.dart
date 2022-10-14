@@ -1,6 +1,8 @@
+import 'package:epasal/providers/auth.dart';
 import 'package:epasal/screens/order_screen.dart';
 import 'package:epasal/screens/user_product.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DrawerScreen extends StatelessWidget {
   const DrawerScreen({super.key});
@@ -36,6 +38,14 @@ class DrawerScreen extends StatelessWidget {
               onTap: () {
                 Navigator.of(context)
                     .pushReplacementNamed(UserProductScreen.routeName);
+              }),
+          const Divider(),
+          ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text('LogOut'),
+              onTap: () {
+                Navigator.of(context).pop();
+                Provider.of<Auth>(context, listen: false).signOut();
               }),
         ],
       ),

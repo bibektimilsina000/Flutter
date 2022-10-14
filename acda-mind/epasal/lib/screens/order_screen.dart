@@ -28,8 +28,13 @@ class OrderScreen extends StatelessWidget {
               );
             } else {
               if (snapshot.error != null) {
+                var errorMsg = snapshot.error.toString();
+
                 return Center(
-                  child: Text('An error Occur'),
+                  child: errorMsg.contains('any orders')
+                      ? Text(snapshot.error.toString())
+                      : Text(
+                          'Error occurs! check your internet connection and try later.'),
                 );
               } else {
                 return Consumer<Orders>(

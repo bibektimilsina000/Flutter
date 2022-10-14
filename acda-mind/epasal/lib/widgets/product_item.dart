@@ -29,7 +29,7 @@ class ProductItem extends StatelessWidget {
               onPressed: (() async {
                 try {
                   await product.toggleFavoriteStatus(
-                      authData.token, authData.userId);
+                      authData.token.toString(), authData.userId);
                 } catch (error) {
                   final snackBar = SnackBar(
                     backgroundColor: Theme.of(context).colorScheme.primary,
