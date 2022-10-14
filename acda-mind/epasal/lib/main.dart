@@ -1,5 +1,6 @@
 import 'package:epasal/providers/auth.dart';
 import 'package:epasal/providers/order.dart';
+import 'package:epasal/screens/277%20splash_screen.dart';
 import 'package:epasal/screens/auth_screen.dart';
 import 'package:epasal/screens/cart_screen.dart';
 import 'package:epasal/screens/edit_product_screen.dart';
@@ -46,7 +47,14 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
                 colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green)
                     .copyWith(secondary: Colors.yellow)),
-            home: auth.isAuthenticate ? ProductOverview() : AuthScreen(),
+            home: auth.isAuthenticate
+                ? ProductOverview()
+                : FutureBuilder(
+                    future: auth.tryAutoLogin(),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) =>
+                        snapshot.connectionState == ConnectionState.waiting
+                            ? SplashScreen()
+                            : AuthScreen()),
             routes: {
               ProductOverview.routeName: (context) => const ProductOverview(),
               ProductDetail.routeName: (context) => const ProductDetail(),
