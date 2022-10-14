@@ -45,6 +45,8 @@ class DrawerScreen extends StatelessWidget {
               title: const Text('LogOut'),
               onTap: () {
                 Navigator.of(context).pop();
+                Navigator.of(context).pushNamed('/');
+
                 Provider.of<Auth>(context, listen: false).signOut();
               }),
         ],
