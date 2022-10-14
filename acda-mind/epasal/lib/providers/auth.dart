@@ -71,14 +71,18 @@ class Auth with ChangeNotifier {
 
   Future<bool> tryAutoLogin() async {
     final pref = await SharedPreferences.getInstance();
+
     if (!pref.containsKey('userData')) {
       return false;
     }
-    final getExatractedData = json.decode(pref.getString('userData').toString())
-        as Map<String, Object>;
+
+    final getExatractedData =
+        json.decode(pref.getString('userData').toString());
+    // as Map<String, Object>;
     final exatractedDate =
         DateTime.parse(getExatractedData['expiryDate'].toString());
 
+    print(exatractedDate.isBefore(DateTime.now()));
     if (exatractedDate.isBefore(DateTime.now())) {
       return false;
     }
@@ -86,7 +90,9 @@ class Auth with ChangeNotifier {
     _token = getExatractedData['token'].toString();
     _userId = getExatractedData['expiryDate'].toString();
     _experyDate = exatractedDate;
+    print('fine till here');
     notifyListeners();
+
     return true;
   }
 
