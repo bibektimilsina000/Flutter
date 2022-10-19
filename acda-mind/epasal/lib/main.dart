@@ -1,6 +1,6 @@
 import 'package:epasal/providers/auth.dart';
 import 'package:epasal/providers/order.dart';
-import 'package:epasal/screens/277%20splash_screen.dart';
+import 'package:epasal/screens/splash_screen.dart';
 import 'package:epasal/screens/auth_screen.dart';
 import 'package:epasal/screens/cart_screen.dart';
 import 'package:epasal/screens/edit_product_screen.dart';
