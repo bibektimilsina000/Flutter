@@ -48,6 +48,7 @@ class Auth with ChangeNotifier {
       _experyDate = DateTime.now()
           .add(Duration(seconds: int.parse(responseData['expiresIn'])));
       _userId = responseData['localId'];
+
       notifyListeners();
       final pref = await SharedPreferences.getInstance();
       final userData = json.encode({
@@ -87,7 +88,7 @@ class Auth with ChangeNotifier {
     }
 
     _token = getExatractedData['token'].toString();
-    _userId = getExatractedData['expiryDate'].toString();
+    _userId = getExatractedData['userId'].toString();
     _experyDate = exatractedDate;
 
     notifyListeners();
