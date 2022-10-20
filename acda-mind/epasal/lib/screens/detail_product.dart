@@ -1,5 +1,4 @@
 import 'package:epasal/providers/cart.dart';
-import 'package:epasal/widgets/cart_icon_and_badge.dart';
 
 import '/providers/products.dart';
 import 'package:flutter/material.dart';
@@ -17,60 +16,70 @@ class ProductDetail extends StatelessWidget {
     final lodedProduct =
         Provider.of<Products>(context, listen: false).getById(productId);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(lodedProduct.title),
-        actions: const [CartIconAndBadge()],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Card(
+      body: CustomScrollView(
+        slivers: <Widget>[
+          SliverAppBar(
+            expandedHeight: 300,
+            pinned: true,
+            flexibleSpace: FlexibleSpaceBar(
+              title: Container(
+                padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                decoration: BoxDecoration(color: Colors.green),
+                child: Text(lodedProduct.title),
+              ),
+              background: Hero(
+                tag: lodedProduct.id,
                 child: Image.network(
                   lodedProduct.imageUrl,
                   fit: BoxFit.cover,
                 ),
               ),
             ),
-            const SizedBox(
-              height: 10,
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Rs: ${lodedProduct.price}',
+                          style: TextStyle(
+                              color: Colors.grey,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(lodedProduct.description),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            ElevatedButton(
+                                onPressed: () {
+                                  Provider.of<Cart>(context, listen: false)
+                                      .addItem(productId, lodedProduct.title,
+                                          lodedProduct.price);
+                                },
+                                child: const Text('Add to cart')),
+                            OutlinedButton(
+                                onPressed: () {}, child: const Text('Buy Now'))
+                          ],
+                        ),
+                        SizedBox(
+                          height: 900,
+                        )
+                      ],
+                    )),
+              ],
             ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(lodedProduct.title),
-                      Text('Rs: ${lodedProduct.price}')
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(lodedProduct.description),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      ElevatedButton(
-                          onPressed: () {
-                            Provider.of<Cart>(context, listen: false).addItem(
-                                productId,
-                                lodedProduct.title,
-                                lodedProduct.price);
-                          },
-                          child: const Text('Add to cart')),
-                      OutlinedButton(
-                          onPressed: () {}, child: const Text('Buy Now'))
-                    ],
-                  )
-                ],
-              ),
-            )
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

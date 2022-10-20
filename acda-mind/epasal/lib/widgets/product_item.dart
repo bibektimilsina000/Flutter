@@ -22,61 +22,63 @@ class ProductItem extends StatelessWidget {
             .pushNamed(ProductDetail.routeName, arguments: product.id);
       },
       child: GridTile(
-        footer: GridTileBar(
-          title: Text(product.title),
-          backgroundColor: Colors.black54,
-          leading: IconButton(
-              onPressed: (() async {
-                try {
-                  await product.toggleFavoriteStatus(
-                      authData.token.toString(), authData.userId);
-                } catch (error) {
-                  final snackBar = SnackBar(
-                    backgroundColor: Theme.of(context).colorScheme.primary,
-                    content: Text(
-                      error.toString(),
-                    ),
-                    action: SnackBarAction(
-                        label: 'Ok',
-                        onPressed: () {
-                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                        }),
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                }
-              }),
+          footer: GridTileBar(
+            title: Text(product.title),
+            backgroundColor: Colors.black54,
+            leading: IconButton(
+                onPressed: (() async {
+                  try {
+                    await product.toggleFavoriteStatus(
+                        authData.token.toString(), authData.userId);
+                  } catch (error) {
+                    final snackBar = SnackBar(
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      content: Text(
+                        error.toString(),
+                      ),
+                      action: SnackBarAction(
+                          label: 'Ok',
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                          }),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                  }
+                }),
+                icon: Icon(
+                  product.isFav ? Icons.favorite : Icons.favorite_border,
+                  color: Theme.of(context).colorScheme.secondary,
+                )),
+            trailing: IconButton(
+              onPressed: () {
+                cart.addItem(product.id, product.title, product.price);
+                ScaffoldMessenger.of(context).hideCurrentSnackBar();
+
+                final snackBar = SnackBar(
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  content: const Text('Product Added to Cart'),
+                  action: SnackBarAction(
+                      label: 'Undo',
+                      onPressed: () {
+                        cart.removeSingleItem(product.id);
+                      }),
+                );
+
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              },
               icon: Icon(
-                product.isFav ? Icons.favorite : Icons.favorite_border,
+                Icons.shopping_cart,
                 color: Theme.of(context).colorScheme.secondary,
-              )),
-          trailing: IconButton(
-            onPressed: () {
-              cart.addItem(product.id, product.title, product.price);
-              ScaffoldMessenger.of(context).hideCurrentSnackBar();
-
-              final snackBar = SnackBar(
-                backgroundColor: Theme.of(context).colorScheme.primary,
-                content: const Text('Product Added to Cart'),
-                action: SnackBarAction(
-                    label: 'Undo',
-                    onPressed: () {
-                      cart.removeSingleItem(product.id);
-                    }),
-              );
-
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            },
-            icon: Icon(
-              Icons.shopping_cart,
-              color: Theme.of(context).colorScheme.secondary,
+              ),
             ),
           ),
-        ),
-        child: Image.network(
-          product.imageUrl,
-          fit: BoxFit.cover,
-        ),
-      ),
+          child: Hero(
+            tag: product.id,
+            child: Image.network(product.imageUrl),
+            // child: FadeInImage(
+            //     placeholder: AssetImage('Assets/images/placeholder.png'),
+            //     image: NetworkImage(product.imageUrl)),
+          )),
     );
   }
 }
