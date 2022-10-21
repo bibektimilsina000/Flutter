@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddImage extends StatefulWidget {
   const AddImage({super.key});
@@ -9,6 +10,12 @@ class AddImage extends StatefulWidget {
 
 class _AddImageState extends State<AddImage> {
   var _sectedImage;
+
+  Future<void> selctImage() async {
+    final ImagePicker picker = ImagePicker();
+    _sectedImage = picker.pickImage(
+        source: ImageSource.camera, maxHeight: 600, maxWidth: double.infinity);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +36,7 @@ class _AddImageState extends State<AddImage> {
                 : Image.file(_sectedImage),
           ),
           TextButton.icon(
-              onPressed: (() {}),
+              onPressed: (() => selctImage()),
               icon: const Icon(Icons.camera_alt_rounded),
               label: const Text('Take Picture'))
         ],
