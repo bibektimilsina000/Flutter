@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -13,8 +14,11 @@ class _AddImageState extends State<AddImage> {
 
   Future<void> selctImage() async {
     final ImagePicker picker = ImagePicker();
-    _sectedImage = picker.pickImage(
+    var pickedImage = await picker.pickImage(
         source: ImageSource.camera, maxHeight: 600, maxWidth: double.infinity);
+    setState(() {
+      _sectedImage = File(pickedImage!.path);
+    });
   }
 
   @override
@@ -33,7 +37,10 @@ class _AddImageState extends State<AddImage> {
                 ? const Center(
                     child: Text('No Image Selected'),
                   )
-                : Image.file(_sectedImage),
+                : Image.file(
+                    _sectedImage,
+                    fit: BoxFit.cover,
+                  ),
           ),
           TextButton.icon(
               onPressed: (() => selctImage()),
