@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart' as syspath;
 
 class AddImage extends StatefulWidget {
   const AddImage({super.key});
@@ -19,6 +21,12 @@ class _AddImageState extends State<AddImage> {
     setState(() {
       _sectedImage = File(pickedImage!.path);
     });
+
+    final appDir = await syspath.getApplicationDocumentsDirectory();
+
+    final fileName = path.basename(appDir.path);
+
+    final savedImage = _sectedImage.copy('${appDir.path}/$fileName');
   }
 
   @override
