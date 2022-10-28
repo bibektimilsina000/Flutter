@@ -5,7 +5,9 @@ import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart' as syspath;
 
 class AddImage extends StatefulWidget {
-  const AddImage({super.key});
+  final Function _pickImage;
+
+  const AddImage(this._pickImage);
 
   @override
   State<AddImage> createState() => _AddImageState();
@@ -18,15 +20,19 @@ class _AddImageState extends State<AddImage> {
     final ImagePicker picker = ImagePicker();
     var pickedImage = await picker.pickImage(
         source: ImageSource.camera, maxHeight: 600, maxWidth: double.infinity);
+    if (pickedImage == null) {
+      return;
+    }
     setState(() {
-      _sectedImage = File(pickedImage!.path);
+      _sectedImage = File(pickedImage.path);
     });
 
     final appDir = await syspath.getApplicationDocumentsDirectory();
 
     final fileName = path.basename(appDir.path);
 
-    final savedImage = _sectedImage.copy('${appDir.path}/$fileName');
+    final savedImage = await _sectedImage.copy('${appDir.path}/$fileName');
+    widget._pickImage(savedImage);
   }
 
   @override

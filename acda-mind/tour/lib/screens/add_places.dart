@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tour/providers/places.dart';
 import 'package:tour/widgets/add_image.dart';
 
 class AddPlaceScreen extends StatefulWidget {
@@ -11,6 +15,12 @@ class AddPlaceScreen extends StatefulWidget {
 
 class _AddPlaceScreenState extends State<AddPlaceScreen> {
   final _titleControler = TextEditingController();
+  var _pickedImage;
+
+  void _pickImage(File pickedImage) {
+    _pickedImage = pickedImage;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,11 +40,18 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                   controller: _titleControler,
                 ),
               ),
-              const AddImage()
+              AddImage(_pickImage)
             ],
           )),
           ElevatedButton.icon(
-            onPressed: () {},
+            onPressed: () {
+              if (_pickedImage == null) {
+                return;
+              }
+              Provider.of<GreatPlaces>(context, listen: false)
+                  .addPlace(_titleControler.text, _pickedImage);
+              Navigator.of(context).pop();
+            },
             icon: const Icon(Icons.add),
             label: const Text('Add Place'),
           )
