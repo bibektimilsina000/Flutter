@@ -14,7 +14,7 @@ class Category extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 300,
-          childAspectRatio: 3 / 2.35,
+          childAspectRatio: 3 / 2.4,
           mainAxisSpacing: 15,
           crossAxisSpacing: 15,
         ),
