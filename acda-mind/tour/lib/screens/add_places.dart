@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tour/providers/places.dart';
 import 'package:tour/widgets/add_image.dart';
+import 'package:tour/widgets/locationPick.dart';
 
 class AddPlaceScreen extends StatefulWidget {
   static const routeName = '/add-place';
@@ -40,7 +41,11 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                   controller: _titleControler,
                 ),
               ),
-              AddImage(_pickImage)
+              AddImage(_pickImage),
+              const SizedBox(
+                height: 10,
+              ),
+              const LocationPick()
             ],
           )),
           ElevatedButton.icon(
@@ -54,7 +59,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
             },
             icon: const Icon(Icons.add),
             label: const Text('Add Place'),
-          )
+          ),
         ],
       ),
     );
